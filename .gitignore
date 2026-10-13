@@ -1,0 +1,38 @@
+# Local working notes
+/agent/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+dist/
+build/
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+.private/
+*.pem
+*.key
+env.sh
+
+# User-provided data and generated artifacts
+/data/
+/datasets/
+/outputs/
+/runs/
+/cache/
+/checkpoints/
+/activations/
+/wandb/
+*.npz
+*.npy
+*.pt
+*.pth
+*.safetensors
+

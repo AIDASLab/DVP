@@ -1,0 +1,2 @@
+anchor_value,factor,state_a,state_b,N_a,N_b,low_n_flag,support_size_pair,top_k_partners,min_partner_count,lambda_prior,draws,seed,alpha_value,beta_relation,joint_ot_fast_mean,joint_ot_fast_within_relation,joint_ot_fast_across_partner,joint_jsd_mean,joint_jsd_q025,joint_jsd_q975,value_jsd_mean,relation_jsd_mean
+fairness,competing_interests,many,some,47,182,0,74,20,3,20.0,200,0,1.0,0.5,0.3487877533190548,0.06395997906932344,0.2848277742497314,0.27607037701095133,0.22264099770759782,0.32977242972543946,0.05872173651656298,0.02011959655454153

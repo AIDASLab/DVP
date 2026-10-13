@@ -1,0 +1,991 @@
+{
+  "schema_version": "profile-bundle-v1",
+  "package_id": "native-aggregate-profile-examples-v1",
+  "data_status": "local_candidate",
+  "license_status": "unassigned",
+  "publication_status": "pending_rights_and_quality_review",
+  "content": "Existing aggregate statistics; no corpus text, row-level annotations, or raw activation arrays",
+  "groups": {
+    "culturax_ar_cleaned": {
+      "source_family": "CulturaX"
+    },
+    "culturax_de_cleaned": {
+      "source_family": "CulturaX"
+    },
+    "culturax_fr_cleaned": {
+      "source_family": "CulturaX"
+    },
+    "culturax_ja_cleaned": {
+      "source_family": "CulturaX"
+    },
+    "culturax_ko_cleaned": {
+      "source_family": "CulturaX"
+    },
+    "culturax_ru_cleaned": {
+      "source_family": "CulturaX"
+    },
+    "culturax_zh_cleaned": {
+      "source_family": "CulturaX"
+    }
+  },
+  "families": {
+    "base": {
+      "files": 7,
+      "rows": 21,
+      "groups": [
+        "culturax_ar_cleaned",
+        "culturax_de_cleaned",
+        "culturax_fr_cleaned",
+        "culturax_ja_cleaned",
+        "culturax_ko_cleaned",
+        "culturax_ru_cleaned",
+        "culturax_zh_cleaned"
+      ],
+      "support_fields": [
+        "total_count"
+      ]
+    },
+    "continuous_base": {
+      "files": 7,
+      "rows": 21,
+      "groups": [
+        "culturax_ar_cleaned",
+        "culturax_de_cleaned",
+        "culturax_fr_cleaned",
+        "culturax_ja_cleaned",
+        "culturax_ko_cleaned",
+        "culturax_ru_cleaned",
+        "culturax_zh_cleaned"
+      ],
+      "support_fields": [
+        "n_unique_sentences"
+      ]
+    },
+    "context": {
+      "files": 7,
+      "rows": 7,
+      "groups": [
+        "culturax_ar_cleaned",
+        "culturax_de_cleaned",
+        "culturax_fr_cleaned",
+        "culturax_ja_cleaned",
+        "culturax_ko_cleaned",
+        "culturax_ru_cleaned",
+        "culturax_zh_cleaned"
+      ],
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ]
+    },
+    "continuous_context": {
+      "files": 7,
+      "rows": 7,
+      "groups": [
+        "culturax_ar_cleaned",
+        "culturax_de_cleaned",
+        "culturax_fr_cleaned",
+        "culturax_ja_cleaned",
+        "culturax_ko_cleaned",
+        "culturax_ru_cleaned",
+        "culturax_zh_cleaned"
+      ],
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ]
+    },
+    "relations": {
+      "files": 7,
+      "rows": 7,
+      "groups": [
+        "culturax_ar_cleaned",
+        "culturax_de_cleaned",
+        "culturax_fr_cleaned",
+        "culturax_ja_cleaned",
+        "culturax_ko_cleaned",
+        "culturax_ru_cleaned",
+        "culturax_zh_cleaned"
+      ],
+      "support_fields": []
+    },
+    "context_relation_ot": {
+      "files": 7,
+      "rows": 7,
+      "groups": [
+        "culturax_ar_cleaned",
+        "culturax_de_cleaned",
+        "culturax_fr_cleaned",
+        "culturax_ja_cleaned",
+        "culturax_ko_cleaned",
+        "culturax_ru_cleaned",
+        "culturax_zh_cleaned"
+      ],
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ]
+    },
+    "context_relation_counts": {
+      "files": 7,
+      "rows": 7,
+      "groups": [
+        "culturax_ar_cleaned",
+        "culturax_de_cleaned",
+        "culturax_fr_cleaned",
+        "culturax_ja_cleaned",
+        "culturax_ko_cleaned",
+        "culturax_ru_cleaned",
+        "culturax_zh_cleaned"
+      ],
+      "support_fields": [
+        "support_N_state"
+      ]
+    },
+    "context_relation_deltas": {
+      "files": 7,
+      "rows": 7,
+      "groups": [
+        "culturax_ar_cleaned",
+        "culturax_de_cleaned",
+        "culturax_fr_cleaned",
+        "culturax_ja_cleaned",
+        "culturax_ko_cleaned",
+        "culturax_ru_cleaned",
+        "culturax_zh_cleaned"
+      ],
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ]
+    }
+  },
+  "files": [
+    {
+      "path": "data/base/culturax_ar_cleaned.jsonl",
+      "family": "base",
+      "group": "culturax_ar_cleaned",
+      "format": "jsonl",
+      "value_field": "value_item",
+      "support_fields": [
+        "total_count"
+      ],
+      "rows": 3,
+      "bytes": 5548,
+      "sha256": "f6997d59ec4883988e6bd947b5f6de0bfaca52a1169c0c42eea104f375c0e617",
+      "source_sha256": "3bfdfe77f29c5717a85674e9a06f5ee2e497154861325a25f34e6113a478de0f"
+    },
+    {
+      "path": "data/base/culturax_de_cleaned.jsonl",
+      "family": "base",
+      "group": "culturax_de_cleaned",
+      "format": "jsonl",
+      "value_field": "value_item",
+      "support_fields": [
+        "total_count"
+      ],
+      "rows": 3,
+      "bytes": 5549,
+      "sha256": "e68badfdea494efe5ba6e2b5a39c60e1f706781022a94f5306653fba27346eae",
+      "source_sha256": "6124492f633d453eaadc9b69368f29a89f1743ca735d79ff8b2ec547b2566d04"
+    },
+    {
+      "path": "data/base/culturax_fr_cleaned.jsonl",
+      "family": "base",
+      "group": "culturax_fr_cleaned",
+      "format": "jsonl",
+      "value_field": "value_item",
+      "support_fields": [
+        "total_count"
+      ],
+      "rows": 3,
+      "bytes": 5548,
+      "sha256": "b1a259151190b8c23e5a67981851029f9b53b66e7c1c493bb803038814a64102",
+      "source_sha256": "4511d5bda118c8f46150490bb60f488405a7072f3875657e8262797215c0d4bc"
+    },
+    {
+      "path": "data/base/culturax_ja_cleaned.jsonl",
+      "family": "base",
+      "group": "culturax_ja_cleaned",
+      "format": "jsonl",
+      "value_field": "value_item",
+      "support_fields": [
+        "total_count"
+      ],
+      "rows": 3,
+      "bytes": 5549,
+      "sha256": "d411fa7bf4b4463eb4e93b3412a2591997e6e88c73a2470802277114bcdf2f78",
+      "source_sha256": "4c4442322f02a1e1d646555391c699a132e53fa50a7f8b4d8a61e856c914ab2f"
+    },
+    {
+      "path": "data/base/culturax_ko_cleaned.jsonl",
+      "family": "base",
+      "group": "culturax_ko_cleaned",
+      "format": "jsonl",
+      "value_field": "value_item",
+      "support_fields": [
+        "total_count"
+      ],
+      "rows": 3,
+      "bytes": 5553,
+      "sha256": "047fd2152cfb481a7dfd0bd245a67f31b7a6798d70d885f8eadb00892e98b281",
+      "source_sha256": "be515e385d5345e7fdd6817e2592b8101b494dac66e274a3c0662cafa532d7ab"
+    },
+    {
+      "path": "data/base/culturax_ru_cleaned.jsonl",
+      "family": "base",
+      "group": "culturax_ru_cleaned",
+      "format": "jsonl",
+      "value_field": "value_item",
+      "support_fields": [
+        "total_count"
+      ],
+      "rows": 3,
+      "bytes": 5553,
+      "sha256": "105474a9ca7ba8b499a1431e069e1cee8485596ddbbc14e1e5fb0eb298dc62fd",
+      "source_sha256": "a8f43ce98e759692e7328d5b2e75ff3f6bc4814697d7ce0eb998f7b250d0117f"
+    },
+    {
+      "path": "data/base/culturax_zh_cleaned.jsonl",
+      "family": "base",
+      "group": "culturax_zh_cleaned",
+      "format": "jsonl",
+      "value_field": "value_item",
+      "support_fields": [
+        "total_count"
+      ],
+      "rows": 3,
+      "bytes": 5551,
+      "sha256": "d79302a32499d70a507be4af83deb17fd195312007d92240bb52483198e66872",
+      "source_sha256": "e27cd0b40b95da01da902dcbfa90ab7028f085117c9917ebec1d34ec2a0768e0"
+    },
+    {
+      "path": "data/continuous_base/culturax_ar_cleaned.jsonl",
+      "family": "continuous_base",
+      "group": "culturax_ar_cleaned",
+      "format": "jsonl",
+      "value_field": "value_item",
+      "support_fields": [
+        "n_unique_sentences"
+      ],
+      "rows": 3,
+      "bytes": 2194,
+      "sha256": "4980d0f4456a698202bb790f648c118cd91aaf0c1d84d7767075ae8ac718f754",
+      "source_sha256": "ee0f6463e00aadf319b514faa909c3569b9303d6c2c91ce216ac0b54e56fa6a7"
+    },
+    {
+      "path": "data/continuous_base/culturax_de_cleaned.jsonl",
+      "family": "continuous_base",
+      "group": "culturax_de_cleaned",
+      "format": "jsonl",
+      "value_field": "value_item",
+      "support_fields": [
+        "n_unique_sentences"
+      ],
+      "rows": 3,
+      "bytes": 2195,
+      "sha256": "193ca0204901911974d37aa0ae7e960e6f26df74b850b0fd59b5facfd3425845",
+      "source_sha256": "111ad13caebe93937cfb9df1b02706f51e55603dcb8196dccc15f027c9fc3888"
+    },
+    {
+      "path": "data/continuous_base/culturax_fr_cleaned.jsonl",
+      "family": "continuous_base",
+      "group": "culturax_fr_cleaned",
+      "format": "jsonl",
+      "value_field": "value_item",
+      "support_fields": [
+        "n_unique_sentences"
+      ],
+      "rows": 3,
+      "bytes": 2198,
+      "sha256": "594cd0182ffb4460f96d84aa897142470a64764f79515921be33b422fc937859",
+      "source_sha256": "60825e6aea1ccf2523cf4e88def34983fbcafc84f9608fcf0a5484fcfbc1ba62"
+    },
+    {
+      "path": "data/continuous_base/culturax_ja_cleaned.jsonl",
+      "family": "continuous_base",
+      "group": "culturax_ja_cleaned",
+      "format": "jsonl",
+      "value_field": "value_item",
+      "support_fields": [
+        "n_unique_sentences"
+      ],
+      "rows": 3,
+      "bytes": 2193,
+      "sha256": "2ac71c6efb4d2a6a7c7e8c6da9d536f2399130909648c4088383ad1fb8dcbafc",
+      "source_sha256": "7d3c263b97a8dc4e9ca322d98a9b69443b076bc290daeff63ba6d889d3ea3e44"
+    },
+    {
+      "path": "data/continuous_base/culturax_ko_cleaned.jsonl",
+      "family": "continuous_base",
+      "group": "culturax_ko_cleaned",
+      "format": "jsonl",
+      "value_field": "value_item",
+      "support_fields": [
+        "n_unique_sentences"
+      ],
+      "rows": 3,
+      "bytes": 2193,
+      "sha256": "d27b3035f8497ddbaf6cc7ff14edb158fad15fae4a7d12c4df7181fe43e2b7f5",
+      "source_sha256": "9aa9090bd5201597a89bac48dfa21ad7894a601e1fabb18cc9314c97d49655ac"
+    },
+    {
+      "path": "data/continuous_base/culturax_ru_cleaned.jsonl",
+      "family": "continuous_base",
+      "group": "culturax_ru_cleaned",
+      "format": "jsonl",
+      "value_field": "value_item",
+      "support_fields": [
+        "n_unique_sentences"
+      ],
+      "rows": 3,
+      "bytes": 2197,
+      "sha256": "47d6c9833b8cd5a7252330709f1ff173f89d04b1fd8a5022f69cfe69ee6b85f7",
+      "source_sha256": "ed5769743576fc6d67dc5238cbc678f1b7407cec293db2adbe151b75c08aa123"
+    },
+    {
+      "path": "data/continuous_base/culturax_zh_cleaned.jsonl",
+      "family": "continuous_base",
+      "group": "culturax_zh_cleaned",
+      "format": "jsonl",
+      "value_field": "value_item",
+      "support_fields": [
+        "n_unique_sentences"
+      ],
+      "rows": 3,
+      "bytes": 2202,
+      "sha256": "fb54c82d2c0f2cbd94f66f2e645c7892ea9cf8e6d26ba916a5062e47ec2e359a",
+      "source_sha256": "355c0c4c39f0665e3e2c7f425b3cf50c38e5d9de65dd7af62a5b38e71561441b"
+    },
+    {
+      "path": "data/context/culturax_ar_cleaned.csv",
+      "family": "context",
+      "group": "culturax_ar_cleaned",
+      "format": "csv",
+      "value_field": "value_item",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 1068,
+      "sha256": "45088fe234a2b70f4daf600187597ca02d82a1848d04e63e57755c0ed6ef22e9",
+      "source_sha256": "2766d10ccc67a9d36c71f35ec7fff43aa986a9c29cd4476c4576775af0d451ad"
+    },
+    {
+      "path": "data/context/culturax_de_cleaned.csv",
+      "family": "context",
+      "group": "culturax_de_cleaned",
+      "format": "csv",
+      "value_field": "value_item",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 1070,
+      "sha256": "09c0642a41512e9a32b45072c5d7d20eb1cdc9e807fb8d231653f9cdae320d80",
+      "source_sha256": "8545a9d40b68d2406d085a62aa9f7b5c498bbc1e6ab6c3b0192f9ee233c3aba4"
+    },
+    {
+      "path": "data/context/culturax_fr_cleaned.csv",
+      "family": "context",
+      "group": "culturax_fr_cleaned",
+      "format": "csv",
+      "value_field": "value_item",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 1066,
+      "sha256": "0bde72871db451882017b562a37058d79a87bc4ad9fed9355a6f2ffd348ec715",
+      "source_sha256": "ccf84504b5d3e7db2b1b32e5ff0e93906d0233fef7106ff5e05d26c76c3afe9e"
+    },
+    {
+      "path": "data/context/culturax_ja_cleaned.csv",
+      "family": "context",
+      "group": "culturax_ja_cleaned",
+      "format": "csv",
+      "value_field": "value_item",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 1063,
+      "sha256": "f24c363ff3a853512e9043be26cc534608cc4497a9424428de7d53aa06bc4784",
+      "source_sha256": "6a558c966dca744643bad1e6a6720eedf96e36e5533590a749fafe1a8234b6e1"
+    },
+    {
+      "path": "data/context/culturax_ko_cleaned.csv",
+      "family": "context",
+      "group": "culturax_ko_cleaned",
+      "format": "csv",
+      "value_field": "value_item",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 1060,
+      "sha256": "8a422bd1de0ad89c8957092c2ffa47381d0e0f7869311349e63975ded6e2912b",
+      "source_sha256": "51c425ce3e14686be5b7e9170d687d6483816dd10b4191abed98d98024c86854"
+    },
+    {
+      "path": "data/context/culturax_ru_cleaned.csv",
+      "family": "context",
+      "group": "culturax_ru_cleaned",
+      "format": "csv",
+      "value_field": "value_item",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 1066,
+      "sha256": "c9698b3ccd78d56199c67af75bf743ff2b5388b1954109a1f440806252f7e9a9",
+      "source_sha256": "bd30c95344e14b664004458350348a596f095e74429cf4d541143fd17b8b0921"
+    },
+    {
+      "path": "data/context/culturax_zh_cleaned.csv",
+      "family": "context",
+      "group": "culturax_zh_cleaned",
+      "format": "csv",
+      "value_field": "value_item",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 1067,
+      "sha256": "ffafba713575e14c89eed9f8094d58cb6ab0d963ce041927efceda63535352df",
+      "source_sha256": "107817e749284d27afad1b78b04fc694209fd87d346404f4acbf7b4268bae20f"
+    },
+    {
+      "path": "data/continuous_context/culturax_ar_cleaned.csv",
+      "family": "continuous_context",
+      "group": "culturax_ar_cleaned",
+      "format": "csv",
+      "value_field": "value_item",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 821,
+      "sha256": "0aa7c45712047982e5dc84c391b3233f44a1e2deca07de26821faede9d8b7551",
+      "source_sha256": "995b9b33b5715a19626ee9e3db53e1d89e3cc6b3f0639c7cee2eea9eddd1a793"
+    },
+    {
+      "path": "data/continuous_context/culturax_de_cleaned.csv",
+      "family": "continuous_context",
+      "group": "culturax_de_cleaned",
+      "format": "csv",
+      "value_field": "value_item",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 816,
+      "sha256": "f0ae30a708e3f2f023a1e29d023d995df6dd0aad4f88e7684c71d1d6257c87df",
+      "source_sha256": "66d5730985e34f7fcf346f4a8568f8db2dde17146acccff58210cc7b70c75548"
+    },
+    {
+      "path": "data/continuous_context/culturax_fr_cleaned.csv",
+      "family": "continuous_context",
+      "group": "culturax_fr_cleaned",
+      "format": "csv",
+      "value_field": "value_item",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 820,
+      "sha256": "2895fddf329980df83cd0a284c18dcb6168e5c62c9f188a95289a6d82a209be1",
+      "source_sha256": "11a67c26e0e9ed65c9f88bd9dda0ef09742231f83fed2b477fa118a6472144a3"
+    },
+    {
+      "path": "data/continuous_context/culturax_ja_cleaned.csv",
+      "family": "continuous_context",
+      "group": "culturax_ja_cleaned",
+      "format": "csv",
+      "value_field": "value_item",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 820,
+      "sha256": "cee8eafe49593c49fdfc152ce5dc94d8d37cb9babd8f96c3a38dd3e3120376b9",
+      "source_sha256": "87f8364e43e02c9b4005d928402e5fc38f1b30e66ea9c23bbdf68054ff8533e2"
+    },
+    {
+      "path": "data/continuous_context/culturax_ko_cleaned.csv",
+      "family": "continuous_context",
+      "group": "culturax_ko_cleaned",
+      "format": "csv",
+      "value_field": "value_item",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 823,
+      "sha256": "8ae79a57ce59bdb1df245992b455dcadf91dae36b2264be7af4ce711020e987f",
+      "source_sha256": "64943fcbcc858b5288440cf90c61a8dbdbf18582ae2938b5d169c93c494e1b32"
+    },
+    {
+      "path": "data/continuous_context/culturax_ru_cleaned.csv",
+      "family": "continuous_context",
+      "group": "culturax_ru_cleaned",
+      "format": "csv",
+      "value_field": "value_item",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 821,
+      "sha256": "07502d384648df9d35823a9cdfb0ed9104aa6209c189364e09b6a29e66bc0b8c",
+      "source_sha256": "6a280afc0cb0f800143b044dd53c0022529f41f080d93ec360280dfcb4f5e8c8"
+    },
+    {
+      "path": "data/continuous_context/culturax_zh_cleaned.csv",
+      "family": "continuous_context",
+      "group": "culturax_zh_cleaned",
+      "format": "csv",
+      "value_field": "value_item",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 817,
+      "sha256": "b4f14d266c709eab0cc836e0e1475f60713912a8a051cfd076d2850a28209ab0",
+      "source_sha256": "533c6e86ac14c2f6e4a1cbacb28f4541e46086ba7b764cc08b5e35e96de586e0"
+    },
+    {
+      "path": "data/relations/culturax_ar_cleaned.json",
+      "family": "relations",
+      "group": "culturax_ar_cleaned",
+      "format": "json",
+      "value_field": "value_relations",
+      "support_fields": [],
+      "rows": 1,
+      "bytes": 6040,
+      "sha256": "c3e4a73548bc4d1c4437133198622691eb10f04ca4a9111ecc136371bebac4a3",
+      "source_sha256": "1e48593f89b9bfd4bb8812c706e3cc38a61e0c29f5cf1c1581b6af1f7d11d2bc"
+    },
+    {
+      "path": "data/relations/culturax_de_cleaned.json",
+      "family": "relations",
+      "group": "culturax_de_cleaned",
+      "format": "json",
+      "value_field": "value_relations",
+      "support_fields": [],
+      "rows": 1,
+      "bytes": 6825,
+      "sha256": "7903154dfa30686932f355849cc64b86c361f504e1b75798188a761fb98ffbfd",
+      "source_sha256": "15e9e43d1665356e2f7f7539e2254b351999acb8afd676dbe1e99c444391b464"
+    },
+    {
+      "path": "data/relations/culturax_fr_cleaned.json",
+      "family": "relations",
+      "group": "culturax_fr_cleaned",
+      "format": "json",
+      "value_field": "value_relations",
+      "support_fields": [],
+      "rows": 1,
+      "bytes": 6125,
+      "sha256": "ff873e082ab586ec375181f4189929ea3ea99ec094f3262a56ecaa9a0bd7e013",
+      "source_sha256": "a9505230bf992bba9cb15f8ec7bd83d6a793af9779795ba3b3d4605024b1a65c"
+    },
+    {
+      "path": "data/relations/culturax_ja_cleaned.json",
+      "family": "relations",
+      "group": "culturax_ja_cleaned",
+      "format": "json",
+      "value_field": "value_relations",
+      "support_fields": [],
+      "rows": 1,
+      "bytes": 5643,
+      "sha256": "ab4330d98cf94576e7a516f0d52f2534e9f05fb0035d51c547de43286e130c98",
+      "source_sha256": "56ab81aec7407bf01aa4038ab0640c3b6dab6a8dc8b6ee214ac4a85192f3d445"
+    },
+    {
+      "path": "data/relations/culturax_ko_cleaned.json",
+      "family": "relations",
+      "group": "culturax_ko_cleaned",
+      "format": "json",
+      "value_field": "value_relations",
+      "support_fields": [],
+      "rows": 1,
+      "bytes": 6557,
+      "sha256": "02db2bd9e9e7c7770de1f1031df7b98cfc6cbba41bb774ac1a8014b65b2dd6b0",
+      "source_sha256": "a3e7874eae47156a045f46d8103f3344d1d5872905365a8469a92e666ac7a50c"
+    },
+    {
+      "path": "data/relations/culturax_ru_cleaned.json",
+      "family": "relations",
+      "group": "culturax_ru_cleaned",
+      "format": "json",
+      "value_field": "value_relations",
+      "support_fields": [],
+      "rows": 1,
+      "bytes": 6424,
+      "sha256": "3299baec3e5ba38b0012ff555667d68ad2ef7a123b2dd44eeaf0a79a0c1b82f8",
+      "source_sha256": "012fd4f7f1b931d218066c24a950e1d7bea3f794a544951cb9f310bb69d02aa8"
+    },
+    {
+      "path": "data/relations/culturax_zh_cleaned.json",
+      "family": "relations",
+      "group": "culturax_zh_cleaned",
+      "format": "json",
+      "value_field": "value_relations",
+      "support_fields": [],
+      "rows": 1,
+      "bytes": 6760,
+      "sha256": "84356131e288e2b759d116477a2032eea55117c7d0b6e91f56e2538efb33f23c",
+      "source_sha256": "7af81cdfff6fd7b6a2b3a85b952c2f58e8e546975ccdb95ab4de6c19f222db8b"
+    },
+    {
+      "path": "data/context_relation_ot/culturax_ar_cleaned.csv",
+      "family": "context_relation_ot",
+      "group": "culturax_ar_cleaned",
+      "format": "csv",
+      "value_field": "anchor_value",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 552,
+      "sha256": "2e2d5386f4b11e635dd3f2cb07c89b1e797ec2b78a504c9b6d54e88c85921dc7",
+      "source_sha256": "61cd5cc4f106dda2930ff01aac07b26ef6c53603a7ef01ea60d7993f793f6e17"
+    },
+    {
+      "path": "data/context_relation_ot/culturax_de_cleaned.csv",
+      "family": "context_relation_ot",
+      "group": "culturax_de_cleaned",
+      "format": "csv",
+      "value_field": "anchor_value",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 546,
+      "sha256": "13855bea4e1eff17360d6934d5be805de7f7d86568e2ff99d70d5cdd2ea25262",
+      "source_sha256": "5923f743bd41fcb980303bc6571202afb7317e16d5c70cfc5caa401465b25d74"
+    },
+    {
+      "path": "data/context_relation_ot/culturax_fr_cleaned.csv",
+      "family": "context_relation_ot",
+      "group": "culturax_fr_cleaned",
+      "format": "csv",
+      "value_field": "anchor_value",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 549,
+      "sha256": "678732e81aaa02b42d3d1db54d1ee6235572949982e75c390383ec065028d5b1",
+      "source_sha256": "203a51928901fd371555a6e3ec82210dfdf1021967a0af6c3bdbafd81c66b599"
+    },
+    {
+      "path": "data/context_relation_ot/culturax_ja_cleaned.csv",
+      "family": "context_relation_ot",
+      "group": "culturax_ja_cleaned",
+      "format": "csv",
+      "value_field": "anchor_value",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 547,
+      "sha256": "0077c7506f10d64ef1caedfedee83f4e0303b4eb58a7450b620abcb8c8026bd3",
+      "source_sha256": "62a72512b750152f0de126464d5f92a34cf4557530af6999ac7943f6189298b5"
+    },
+    {
+      "path": "data/context_relation_ot/culturax_ko_cleaned.csv",
+      "family": "context_relation_ot",
+      "group": "culturax_ko_cleaned",
+      "format": "csv",
+      "value_field": "anchor_value",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 551,
+      "sha256": "583e0e3a1ea07002fcd424fc7fb274607c0fb0eab7281c0c33955a6bf2a4fbce",
+      "source_sha256": "442e1644c4f9b8be718015522de3dd254e4dfa057120e6d49eb7c9122aa0a5a2"
+    },
+    {
+      "path": "data/context_relation_ot/culturax_ru_cleaned.csv",
+      "family": "context_relation_ot",
+      "group": "culturax_ru_cleaned",
+      "format": "csv",
+      "value_field": "anchor_value",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 549,
+      "sha256": "9ebdca40e5dc0b99ee9bc4a8f8d9788b1e729ca50e1f72d240f821b967475356",
+      "source_sha256": "0130b16eb0782afdbd719018c9d3b874a03eb05bf456cb85d0b11947cba92181"
+    },
+    {
+      "path": "data/context_relation_ot/culturax_zh_cleaned.csv",
+      "family": "context_relation_ot",
+      "group": "culturax_zh_cleaned",
+      "format": "csv",
+      "value_field": "anchor_value",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 549,
+      "sha256": "b0cc91b4bccc30766360b15ebd54a7445fb225fba7bdac9f8a0e63b6f782b134",
+      "source_sha256": "6ef42cfa4bd76cc8c57f2cfcc7680b20709a9fde624dc863df2c63f49f022bdc"
+    },
+    {
+      "path": "data/context_relation_counts/culturax_ar_cleaned.csv",
+      "family": "context_relation_counts",
+      "group": "culturax_ar_cleaned",
+      "format": "csv",
+      "value_field": "anchor_value",
+      "support_fields": [
+        "support_N_state"
+      ],
+      "rows": 1,
+      "bytes": 165,
+      "sha256": "a55f2e231efe94627ef120dff75b9a014f966d80fb1f5f9e8e428679f6f096b2",
+      "source_sha256": "54a18ce9ac7cac897d383d553e82b232f3617e940c596cb45fe7d1afec6721c8"
+    },
+    {
+      "path": "data/context_relation_counts/culturax_de_cleaned.csv",
+      "family": "context_relation_counts",
+      "group": "culturax_de_cleaned",
+      "format": "csv",
+      "value_field": "anchor_value",
+      "support_fields": [
+        "support_N_state"
+      ],
+      "rows": 1,
+      "bytes": 165,
+      "sha256": "1ea2ab19fdd1e732d8f9ffc277f3197137e843a51bb6a996b72068a2a5ddf614",
+      "source_sha256": "d796a0603a614e116a0ae2c6fc11ada82a304cdf0419aa50cbdf05ca5e696649"
+    },
+    {
+      "path": "data/context_relation_counts/culturax_fr_cleaned.csv",
+      "family": "context_relation_counts",
+      "group": "culturax_fr_cleaned",
+      "format": "csv",
+      "value_field": "anchor_value",
+      "support_fields": [
+        "support_N_state"
+      ],
+      "rows": 1,
+      "bytes": 177,
+      "sha256": "35650c800bb18ac2f1c9dd7429a99cd2119536bd424c1e5c37107d4fadf48607",
+      "source_sha256": "6b29d17ce2a17ef866c77a98192bcef53e74ba8a1760622ea3ed660c6cd72a09"
+    },
+    {
+      "path": "data/context_relation_counts/culturax_ja_cleaned.csv",
+      "family": "context_relation_counts",
+      "group": "culturax_ja_cleaned",
+      "format": "csv",
+      "value_field": "anchor_value",
+      "support_fields": [
+        "support_N_state"
+      ],
+      "rows": 1,
+      "bytes": 175,
+      "sha256": "960be435a34689523e47cc38cb70123f365df761c4bc5c077afc27ecf29d68ae",
+      "source_sha256": "0a0b320c3364c11a7500f7f8cf7feaa5b68327d5db90cbe838d854f61effa2fc"
+    },
+    {
+      "path": "data/context_relation_counts/culturax_ko_cleaned.csv",
+      "family": "context_relation_counts",
+      "group": "culturax_ko_cleaned",
+      "format": "csv",
+      "value_field": "anchor_value",
+      "support_fields": [
+        "support_N_state"
+      ],
+      "rows": 1,
+      "bytes": 165,
+      "sha256": "8022fc8959886257af72e32a5586c094017e6945d2a1766fcf566e4c23e01c8d",
+      "source_sha256": "b22d76b274fc5a2b90205cab1cda853350765fbc8018d90639e45d86d53035f1"
+    },
+    {
+      "path": "data/context_relation_counts/culturax_ru_cleaned.csv",
+      "family": "context_relation_counts",
+      "group": "culturax_ru_cleaned",
+      "format": "csv",
+      "value_field": "anchor_value",
+      "support_fields": [
+        "support_N_state"
+      ],
+      "rows": 1,
+      "bytes": 176,
+      "sha256": "985bee8ab8adbee1d20b46f47689a80d6ca35b01da6451e60cc38df2ab1dc873",
+      "source_sha256": "65390fb3adb81f29542d69e88f78f7987dfde0b7e583e2266c94c3bb9b0afcc6"
+    },
+    {
+      "path": "data/context_relation_counts/culturax_zh_cleaned.csv",
+      "family": "context_relation_counts",
+      "group": "culturax_zh_cleaned",
+      "format": "csv",
+      "value_field": "anchor_value",
+      "support_fields": [
+        "support_N_state"
+      ],
+      "rows": 1,
+      "bytes": 165,
+      "sha256": "13400ee64827394fda75acf6b93f964159a464ed60017d8685295e2d419e003f",
+      "source_sha256": "c97cc2001e9467e5e833fe3bddfa2e31722ae89d82419ab8a03c7b7ed99947c9"
+    },
+    {
+      "path": "data/context_relation_deltas/culturax_ar_cleaned.csv",
+      "family": "context_relation_deltas",
+      "group": "culturax_ar_cleaned",
+      "format": "csv",
+      "value_field": "anchor_value",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 304,
+      "sha256": "7fc367b93bfdd14382e9e9882fc1bf7f84eb36992b62a2c001594ab7286d499d",
+      "source_sha256": "da535e13b106a76c71e341e03c40c1120f686c64bc97a0db71ff6377a4339dab"
+    },
+    {
+      "path": "data/context_relation_deltas/culturax_de_cleaned.csv",
+      "family": "context_relation_deltas",
+      "group": "culturax_de_cleaned",
+      "format": "csv",
+      "value_field": "anchor_value",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 311,
+      "sha256": "903d2ba9ea8e4e775c9ec167f6940e75ea033ff1215922db171d30fc28b2afb1",
+      "source_sha256": "d2f90176c2d7ec7bda0bd3f0ee957a5a2558ebc4bbcfb7172bf5872b54972ef6"
+    },
+    {
+      "path": "data/context_relation_deltas/culturax_fr_cleaned.csv",
+      "family": "context_relation_deltas",
+      "group": "culturax_fr_cleaned",
+      "format": "csv",
+      "value_field": "anchor_value",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 313,
+      "sha256": "e3f40e0872c803bb5f6f6395f746a274fdd6c618cc851f5d01107210bd4af4b4",
+      "source_sha256": "78fa224ebd28ae526f966b90ec81282b989a024f8979d7bdbe936cec5bf0ea44"
+    },
+    {
+      "path": "data/context_relation_deltas/culturax_ja_cleaned.csv",
+      "family": "context_relation_deltas",
+      "group": "culturax_ja_cleaned",
+      "format": "csv",
+      "value_field": "anchor_value",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 310,
+      "sha256": "c703791b5b281973d91da14107e66ed2831671b4569dd29302b3993449169195",
+      "source_sha256": "e53197cfc8409ed1f2f7fa4641e394030d97036741cbd24428ada16a9adaaced"
+    },
+    {
+      "path": "data/context_relation_deltas/culturax_ko_cleaned.csv",
+      "family": "context_relation_deltas",
+      "group": "culturax_ko_cleaned",
+      "format": "csv",
+      "value_field": "anchor_value",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 325,
+      "sha256": "f0132fd4e67876f78d7ab20e6d6930948795d9d89b3e8350b6c086049913b181",
+      "source_sha256": "4cf7f3d77cdefb7699822c6310271f370ac87b4970527451d26c19816864da6c"
+    },
+    {
+      "path": "data/context_relation_deltas/culturax_ru_cleaned.csv",
+      "family": "context_relation_deltas",
+      "group": "culturax_ru_cleaned",
+      "format": "csv",
+      "value_field": "anchor_value",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 317,
+      "sha256": "c7ee733d70f9de38b4e0745bb2a030d6333b0e5a8497784987e93d257812b941",
+      "source_sha256": "78a431ea0e6f9ff468174ba9923f7872d45d3cfd4dae8e39e41b89fc8794ec50"
+    },
+    {
+      "path": "data/context_relation_deltas/culturax_zh_cleaned.csv",
+      "family": "context_relation_deltas",
+      "group": "culturax_zh_cleaned",
+      "format": "csv",
+      "value_field": "anchor_value",
+      "support_fields": [
+        "N_a",
+        "N_b"
+      ],
+      "rows": 1,
+      "bytes": 321,
+      "sha256": "3f428bc70477dc440c898adc51c4414e889892b2bed9c9ba0349e2032bda75d0",
+      "source_sha256": "ac3bbd9b263eb4bdfeb2846d5dc910f9ecda590eed2018c548e31c37bca2bc8a"
+    }
+  ],
+  "statistics_policy": "Preserve stored counts, distributions, diagnostics and existing filters; no recomputation or cross-version imputation",
+  "count_caveat": "Family-specific record counts are not independent people; n_samples and n_unique_sentences are distinct stored measures",
+  "selection": {
+    "purpose": "illustrative_coverage_not_statistical_representativeness",
+    "groups": [
+      "culturax_ar_cleaned",
+      "culturax_de_cleaned",
+      "culturax_fr_cleaned",
+      "culturax_ja_cleaned",
+      "culturax_ko_cleaned",
+      "culturax_ru_cleaned",
+      "culturax_zh_cleaned"
+    ],
+    "base_values": [
+      "fairness",
+      "personal autonomy",
+      "public safety"
+    ],
+    "base_minimum_count": 500,
+    "continuous_base_values": [
+      "fairness",
+      "personal autonomy",
+      "public safety"
+    ],
+    "other_anchor": "fairness",
+    "table_rule": "First source row for fairness with every state support >=10",
+    "relations_rule": "Fairness anchor with its complete stored partner distributions"
+  }
+}

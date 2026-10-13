@@ -1,0 +1,9 @@
+# Optional local annotation and activation-extraction dependencies.
+# Install a torch/vLLM combination suitable for your CUDA runtime.
+-r requirements.txt
+torch
+transformers
+accelerate
+vllm
+# Embedding-based value mapping.
+sentence-transformers

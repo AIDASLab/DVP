@@ -1,0 +1,2 @@
+anchor_value,factor,state_a,state_b,partner_value,relation,pA_mean,pB_mean,delta_mean,delta_q025,delta_q975,N_a,N_b,support_size_pair
+fairness,competing_interests,NONE,many,rights,JUSTIFIES,0.009261790748629806,0.0636410231623215,0.054379232413691705,0.02598347925128141,0.09810059085719049,245,133,79

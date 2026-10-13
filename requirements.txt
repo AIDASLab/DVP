@@ -1,0 +1,4 @@
+# CPU processing and profile aggregation.
+numpy
+pandas
+tqdm
