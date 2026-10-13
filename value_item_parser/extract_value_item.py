@@ -53,7 +53,7 @@ from typing import Any, Dict, List, Optional, Tuple
 from tqdm import tqdm
 
 # -------------------------------
-# Imports from your codebase
+# Inference backend
 # -------------------------------
 # The inference backend is imported when the extractor is constructed.
 
@@ -270,7 +270,7 @@ class ValueItemExtractor:
         for r in raw_outputs:
             r_str = str(r) if r is not None else ""
             items = parse_value_items(r_str)
-            # IMPORTANT: we do NOT keep raw model output anymore
+            # Return parsed value items without retaining raw model responses.
             results.append({"value_items": items})
         return results
 

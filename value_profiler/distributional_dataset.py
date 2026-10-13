@@ -211,7 +211,8 @@ def _safe_get_attribute_label(attribute_raw: str) -> str:
 
 
 def _infer_value_definition_from_categories(categories: List[Dict[str, Any]]) -> Optional[str]:
-    # Placeholder. You can plug in a real value-definition source later.
+    # TODO: Populate value definitions from an explicit definition catalog.
+    # Category descriptions currently leave the value-level definition unset.
     return None
 
 

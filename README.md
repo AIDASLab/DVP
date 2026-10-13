@@ -15,7 +15,7 @@ processing settings are configurable.
 | --- | --- |
 | Data preparation, annotation, and profile construction | Code in this repository; see the [workflow guide](docs/workflow.md) |
 | Small actual aggregate examples | [Bundled examples](examples/released_profiles/README.md), about **0.15 MiB** including their manifest and documentation |
-| Full aggregate profiles | Separate bundle prepared for Hugging Face, about **779 MiB compressed**; publication is pending |
+| Full aggregate profiles | About **779 MiB compressed**; **TODO: publish the Hugging Face dataset and add its link** |
 | Profile download and selection | [`profile_data.organize`](profile_data/organize.py); see the [precomputed-profile guide](docs/precomputed_profiles.md) |
 | Constructed value and context catalogs | [`resources/original/`](resources/original/README.md) |
 
@@ -33,8 +33,8 @@ split.
 
 Here, **full profiles means aggregate statistics, not original corpus records**.
 Source texts, row-level annotations, activation arrays, and model weights are
-not included. The aggregate examples and full bundle have no
-assigned dataset license; see [Data and rights](#data-and-rights).
+not included. See [Data and licenses](#data-and-licenses) for source terms and
+the project licensing status.
 
 ## Use precomputed profiles
 
@@ -78,8 +78,9 @@ Hugging Face retrieval additionally requires:
 python -m pip install huggingface_hub
 ```
 
-After publication, replace `YOUR_ORG/YOUR_DATASET` below with the actual dataset
-repository ID. **This is currently a placeholder; no public download is announced.**
+**TODO: add the Hugging Face dataset URL and replace `YOUR_ORG/YOUR_DATASET`.**
+The following command is a template; the full dataset is not yet available for
+download from this project.
 
 ```bash
 python -m profile_data.organize \
@@ -166,7 +167,17 @@ These checks do not download models. Model-interface and remote-download tests
 use test doubles. The synthetic pipeline example is separate from the actual
 aggregate examples bundled for profile inspection.
 
-## Data and rights
+## TODO
+
+- [ ] Publish the full aggregate bundle on Hugging Face and add its dataset URL.
+- [ ] Add source-specific data acquisition and preparation instructions.
+- [ ] Add steering code and usage examples.
+- [ ] Add model-training code and usage examples.
+- [ ] Add project code/catalog and aggregate-data licenses; see [licensing status](DATA.md#project-licensing-status).
+
+Steering and model training are not included in the current pipeline release.
+
+## Data and licenses
 
 Users provide prepared corpora when constructing new profiles. Place local
 inputs under `data/` and generated artifacts under `outputs/`; both are ignored
@@ -178,10 +189,12 @@ corpora, not representative estimates of individual beliefs or national
 cultures. Support counts are not counts of independent people, and support
 thresholds do not establish annotation accuracy or privacy guarantees.
 
-The aggregate examples and full bundle have **no assigned dataset license** and
-remain subject to source-specific rights review before publication. Hosting on
-Hugging Face rather than GitHub does not change those requirements. Removing
-source text does not itself establish redistribution permission.
+Reddit content is subject to its applicable platform terms and content-owner
+rights. CulturaX follows the terms of its mC4 and OSCAR sources; OSCAR's CC0
+notice does not cover the underlying crawled text. See the linked upstream
+notices in [source-data licenses and terms](DATA.md#source-data-licenses-and-terms).
 
-See [DATA.md](DATA.md), the [example notice](examples/released_profiles/README.md),
-and the full bundle's `NOTICE.md` for the applicable data scope and source notices.
+Project code/catalog and aggregate-data licenses have not yet been assigned.
+This repository does not grant additional rights to source corpora, and
+aggregation alone does not establish redistribution permission. See
+[DATA.md](DATA.md) and the [example notice](examples/released_profiles/README.md).

@@ -1,29 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-generate_posneg_sentences_from_value_items.py
+Generate positive and negative sentence examples for each value item.
 
-What this version fixes / adds
-------------------------------
-1) Fixes the "stuck when N_NEG=0 (or N_POS=0)" bug:
-   - Your previous ok-check required neg_ratio >= min_unique_ratio even when n_neg=0,
-     which can never be satisfied. Now ratios are treated as 1.0 when requested count is 0,
-     and the corresponding constraint is skipped.
+Generation controls
+-------------------
+- A requested count of zero disables generation and uniqueness constraints for
+  that label.
+- Per-value run limits and consecutive no-progress limits stop generation for
+  a value item and continue with the next item.
+- --start_index / --end_index select a slice of the value catalog.
+- --resume_from_output counts existing positive/negative records, skips
+  completed values, and generates the remaining counts for incomplete values.
+  Sentence deduplication applies within the current run only.
 
-2) Adds "skip this value item and continue" behavior:
-   - If we see no progress (0 new sentences) for too many runs, we SKIP the value item.
-   - Also adds a hard cap on runs per value item to prevent infinite loops.
-
-3) Implements "begin from the middle":
-   - Two ways:
-     (A) --start_index / --end_index (already existed; kept and clarified)
-     (B) Resume mode: --resume_from_output
-         - Reads your existing output JSONL and skips value items that already have
-           enough pos/neg sentences collected.
-         - This is the most convenient way to resume after an interruption.
-
-Output format (same)
---------------------
+Output format
+-------------
 JSONL, one line per sentence:
 {
   "value_item": ...,
@@ -337,7 +329,7 @@ def _consume_chunk(
         pos = _dedupe_preserve_order(pos)
         neg = _dedupe_preserve_order(neg)
 
-        # FIX: if n_pos/n_neg == 0, treat ratio as 1.0 and skip corresponding constraints
+        # A zero requested count has no uniqueness or collection constraint.
         pos_ratio = (len(pos) / n_pos) if n_pos > 0 else 1.0
         neg_ratio = (len(neg) / n_neg) if n_neg > 0 else 1.0
 
@@ -431,14 +423,13 @@ def main():
             if have_pos >= args.pos_per_value_item and have_neg >= args.neg_per_value_item:
                 continue
 
-        # If resuming partially, start from existing counts
+        # Collect this run's additions separately from the existing record counts.
         pos_collected: List[str] = []
         neg_collected: List[str] = []
         pos_set, neg_set = set(), set()
 
-        # If resuming into same output, we still do NOT have the actual sentences here,
-        # so we can't dedupe perfectly against prior runs. We dedupe only within this run.
-        # (If you need global dedupe, store sentences per value item and load them here.)
+        # Resume loads counts, not prior sentences; deduplication is run-local.
+        # TODO: Load prior sentences into these sets for cross-run deduplication.
         run_id = 0
         no_progress_runs = 0
 

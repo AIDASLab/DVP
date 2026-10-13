@@ -1,9 +1,7 @@
 {
   "schema_version": "profile-bundle-v1",
   "package_id": "native-aggregate-profile-examples-v1",
-  "data_status": "local_candidate",
   "license_status": "unassigned",
-  "publication_status": "pending_rights_and_quality_review",
   "content": "Existing aggregate statistics; no corpus text, row-level annotations, or raw activation arrays",
   "groups": {
     "culturax_ar_cleaned": {

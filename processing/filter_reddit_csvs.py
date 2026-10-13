@@ -96,7 +96,6 @@ def process_text_cell(text: str, min_comments: int) -> Tuple[str, int]:
       - return (new_text, num_comments_kept)
     """
     lines = split_lines(text)
-    # Count BEFORE filtering (not required, but could be useful). We only return after.
     # Remove AutoModerator lines
     lines = remove_automod(lines)
     # Remap users
@@ -112,8 +111,7 @@ def process_dataframe(df: pd.DataFrame, min_comments: int) -> pd.DataFrame:
     if "text" not in df.columns:
         raise ValueError("Input CSV must contain a 'text' column.")
     if "num_comments" not in df.columns:
-        # If missing, we can still compute kept count from the text;
-        # but keep the column absent if it wasn't there originally.
+        # There is no existing count to preserve in num_comments_original.
         has_num_comments = False
     else:
         has_num_comments = True
@@ -135,8 +133,7 @@ def process_dataframe(df: pd.DataFrame, min_comments: int) -> pd.DataFrame:
     # Filter rows with too few comments AFTER processing
     df = df[df["num_comments_kept"] >= min_comments].reset_index(drop=True)
 
-    # (Optional) You can also update the original num_comments to the kept count
-    # If you prefer to preserve original, comment the next 3 lines.
+    # Preserve an existing count separately, then report the retained count.
     if has_num_comments:
         df["num_comments_original"] = df["num_comments"]
     df["num_comments"] = df["num_comments_kept"]

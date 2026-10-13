@@ -3,7 +3,7 @@
 
 """
 OT-based context effect modeling using CONTINUOUS projection scores (NO BINNING),
-with the SAME normalization / filtering logic as the updated raw-score pipeline.
+with the same normalization and filtering logic as continuous base aggregation.
 
 Supports two modes:
 

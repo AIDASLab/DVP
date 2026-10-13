@@ -98,8 +98,7 @@ def main():
     shard_rows: Dict[int, List[Optional[MetaRow]]] = defaultdict(list)
     value_items_set = set()
 
-    # We will store as an array-like with direct placement by index_in_shard.
-    # Need max index_in_shard per shard.
+    # Track the maximum row index to size each shard's index-addressable list.
     max_idx_per_shard: Dict[int, int] = defaultdict(lambda: -1)
     meta_count = 0
 
@@ -120,7 +119,7 @@ def main():
         if idx > max_idx_per_shard[sid]:
             max_idx_per_shard[sid] = idx
 
-        # We'll place later once we know the list size, so just temporarily store tuples
+        # Collect index/metadata pairs until the shard list size is known.
         shard_rows[sid].append((idx, MetaRow(value_item=vi, label=lb, shard_id=sid, index_in_shard=idx)))
 
     # materialize shard_rows into index-addressable lists
@@ -178,7 +177,7 @@ def main():
                     raise ValueError(f"Missing {k} in shard {shard_path}")
 
             # iterate rows by index_in_shard
-            # We load each layer array once for speed
+            # Load each layer array once.
             layer_arrays = {lid: z[f"layer_{lid}"] for lid in layer_ids}
             N = next(iter(layer_arrays.values())).shape[0]
 

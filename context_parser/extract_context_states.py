@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-extract_context_states_from_factors.py
+Extract value-specific context factors and their states from annotated text.
 
-UPDATED (two-stage, new JSONL input) + SINGLE LLM INSTANCE + COUNT + CHUNKED STREAMING + PERIODIC FLUSH
-------------------------------------------------------------------------------------------------------
-- Supports value-relations JSONL input where value items + ABSENT status are in:
+- Supports value-relations JSONL input where value items and status are in:
     obj["value_relation_graph"]["values"] = [{"value_item": ..., "status": ...}, ...]
 - Only consider value items whose status != "ABSENT"
 - Two-stage extraction:
@@ -13,18 +11,14 @@ UPDATED (two-stage, new JSONL input) + SINGLE LLM INSTANCE + COUNT + CHUNKED STR
   (2) For each activated factor: ask exact state
 - Uses TARGET_TEXT + optional CONTEXT_TEXT (full/window text) for extraction
 
-IMPORTANT CHANGE (memory / speed):
-- Uses ONE underlying model instance (e.g., ONE vLLM engine).
-- Switches system prompt between stages by mutating: llm.model.model.system_prompt
-- Processes INPUT IN CHUNKS (row_chunk_size) so you can stop mid-run without losing everything,
-  while still keeping BATCHED LLM calls (keeps vLLM throughput).
-
-NEW (progress + robustness):
+Streaming and model execution:
+- Shares one model instance and switches its system prompt between stages.
+- Processes input in row chunks with batched model calls.
 - Counts target rows for tqdm total (JSONL / sentences JSONL by counting non-empty lines; CSV via len()).
 - Writes JSONL outputs incrementally (append-per-row, flush every K rows).
 - Optional --resume for JSONL mode: skips rows whose idx already exists in output JSONL.
 
-Legacy modes (CSV / sentences JSONL) are preserved.
+Target CSV and per-value sentence JSONL inputs are also supported.
 """
 
 from __future__ import annotations
@@ -39,7 +33,7 @@ import pandas as pd
 from tqdm import tqdm
 
 # -------------------------------
-# Imports from your codebase
+# Inference backend
 # -------------------------------
 # The inference backend is imported when the shared model is constructed.
 
@@ -661,7 +655,7 @@ def parse_args():
     in_grp.add_argument("--input_jsonl", type=str, default=None,
                         help="Mode B: JSONL where each line contains full_text, target_sentence, value_items OR value_relation_graph.")
     in_grp.add_argument("--target_csv", type=str, default=None,
-                        help="Mode A: legacy target CSV containing (original_text_idx, text, value_item, ...).")
+                        help="Mode A: target CSV containing (original_text_idx, text, value_item, ...).")
     in_grp.add_argument("--sentences_jsonl", type=str, default=None,
                         help="Mode C: sentence JSONL with {value_item, sentence, ...}.")
 

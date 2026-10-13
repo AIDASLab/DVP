@@ -2,7 +2,7 @@
 
 The code repository includes small [aggregate examples](../examples/released_profiles/README.md). Full aggregates are packaged separately as a manifest plus gzip-compressed JSONL, CSV, and JSON files. Neither package contains source texts or row-level annotations.
 
-The organizer selects existing records; it does not run annotation, recompute statistics, or fill missing profiles. Local use requires only Python's standard library. Dataset licenses remain unassigned and publication is pending source-specific rights review.
+The organizer selects existing records; it does not run annotation, recompute statistics, or fill missing profiles. Local use requires only Python's standard library. See [data licenses and source terms](../DATA.md) before reusing or redistributing profiles.
 
 ## Local examples and bundles
 
@@ -36,7 +36,8 @@ Remote access additionally requires:
 python -m pip install huggingface_hub
 ```
 
-After a bundle has been published, replace `YOUR_ORG/YOUR_DATASET` with its actual dataset repository ID:
+**TODO: publish the full bundle, add its Hugging Face dataset URL, and replace `YOUR_ORG/YOUR_DATASET`.**
+The following command is a template until that dataset is available:
 
 ```bash
 python -m profile_data.organize \
@@ -47,7 +48,7 @@ python -m profile_data.organize \
   --output-dir outputs/korean_fairness
 ```
 
-The repository ID above is a placeholder, not an announced or uploaded dataset. `--source-dir` and `--repo-id` are alternatives. Pin `--revision` to a commit for a fixed remote version; the organizer resolves remote revisions to a commit and records it as `source_bundle.resolved_commit` in the output manifest.
+`--source-dir` and `--repo-id` are alternatives. Pin `--revision` to a commit for a fixed remote version; the organizer resolves remote revisions to a commit and records it as `source_bundle.resolved_commit` in the output manifest.
 
 The bundle is an archive of native aggregate formats, not a single tabular Hugging Face dataset configuration. `datasets.load_dataset` does not interpret this custom manifest; use the organizer or ordinary JSONL/CSV/JSON readers. Direct file retrieval is also covered by the [official Hugging Face download guide](https://huggingface.co/docs/huggingface_hub/guides/download).
 
@@ -98,4 +99,4 @@ Counts describe records used by the corresponding aggregate, not independent peo
 
 Examples provide illustrative language/value coverage, not a statistically representative sample. Full means all available aggregates in the selected bundle version, not complete coverage of every source, value, or family.
 
-Read each bundle's `NOTICE.md` and source-specific metadata before redistribution. Original corpus access and aggregate redistribution are separate questions; removing source texts does not establish an automatic exemption from applicable rights or terms.
+Read [DATA.md](../DATA.md) and each bundle's source-specific notices before redistribution. Original corpus access and aggregate redistribution are separate questions; removing source texts does not establish an automatic exemption from applicable rights or terms.

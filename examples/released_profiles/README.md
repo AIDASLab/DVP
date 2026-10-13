@@ -22,4 +22,11 @@ python -m profile_data.organize \
 
 Use a new output directory. See [the precomputed-profile guide](../../docs/precomputed_profiles.md) for native schemas, filters, support denominators, and full-bundle access.
 
-No source texts or row-level annotations are included. These examples derive from [CulturaX](https://huggingface.co/datasets/uonlp/CulturaX); its source terms follow mC4 and OSCAR. A dataset license has not been assigned, and redistribution rights remain under review. Inclusion as a local example is not a rights-clearance or privacy guarantee.
+## Source and license
+
+These examples derive from [CulturaX](https://huggingface.co/datasets/uonlp/CulturaX)
+and contain aggregate statistics, not source texts or row-level annotations.
+See [CulturaX, mC4, and OSCAR source terms](../../DATA.md#culturax-mc4-and-oscar).
+An aggregate-data license has not yet been assigned; see the
+[licensing TODO](../../DATA.md#project-licensing-status).
+Providing these examples does not grant rights to the underlying corpus.

@@ -211,8 +211,7 @@ def main():
 
         # create meta rows pointing to shard + local index
         B = len(batch_rows)
-        # local index within shard after appending: we need to know base offset
-        # compute current shard size BEFORE adding this batch:
+        # The current metadata size is the base row offset for this batch.
         current_size = len(shard_row_meta)
         for bi in range(B):
             row = batch_rows[bi]

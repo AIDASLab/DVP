@@ -35,7 +35,7 @@ from typing import Any, Dict, List, Optional, Tuple
 from tqdm import tqdm
 
 # -------------------------------
-# Imports from your codebase
+# Inference backend
 # -------------------------------
 # The inference backend is imported when the classifier is constructed.
 

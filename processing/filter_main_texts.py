@@ -15,7 +15,7 @@ USAGE EXAMPLES
 # English (default)
 python -m processing.filter_main_texts --dataset_name culturax_en --output_path ./out --lang en
 
-# Korean with script ratio (backward compatible flags are supported)
+# Korean with a minimum script ratio
 python -m processing.filter_main_texts --dataset_name culturax_ko --output_path ./out --lang ko --min_script_ratio 0.3
 
 # Spanish with LLM refinement
@@ -42,7 +42,7 @@ import pandas as pd
 from tqdm import tqdm
 
 # -------------------------------
-# Imports from your codebase
+# Dataset loading
 # -------------------------------
 try:
     from .utils import load_local_dataset
@@ -422,7 +422,7 @@ def clean_with_pipeline(
     batch_size: int = 128,
     lang: str = "en",
     min_script_ratio: float = 0.0,
-    expect_korean: bool = False,  # backward compat: maps to lang="ko" if True
+    expect_korean: bool = False,  # maps to lang="ko" if True
 ) -> str:
     """
     Loads df via utils.load_local_dataset(dataset_name) (expects 'text' column).
@@ -556,11 +556,11 @@ def parse_args():
         choices=sorted(LANG_TO_SCRIPTS.keys()),
         help="Language code: en, ko, ar, nl, es, fr, ja, ru, zh",
     )
-    # New generic script-ratio arg (replaces KO-specific one)
+    # Minimum fraction of characters in the language's target script.
     ap.add_argument("--min_script_ratio", type=float, default=0.0, help="Minimum target-script char ratio to keep (e.g., 0.3)")
-    # Backward compatibility flags
-    ap.add_argument("--expect_korean", action="store_true", help="[Deprecated] If set, enforce Hangul ratio by mapping --lang ko")
-    ap.add_argument("--min_hangul_ratio", type=float, default=None, help="[Deprecated] Use --min_script_ratio instead")
+    # Korean-specific aliases.
+    ap.add_argument("--expect_korean", action="store_true", help="Set the target language to Korean, equivalent to --lang ko")
+    ap.add_argument("--min_hangul_ratio", type=float, default=None, help="Set --min_script_ratio when that option is zero")
     return ap.parse_args()
 
 

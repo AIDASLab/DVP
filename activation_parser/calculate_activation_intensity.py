@@ -139,7 +139,7 @@ def quantize_scores(x: np.ndarray, quant: str) -> np.ndarray:
         return x.astype(np.float16)
     if quant == "int16":
         # cosine is in [-1,1], dot could be larger; int16 may overflow if dot is big.
-        # user is using cosine; we assume safe: [-1,1] -> [-10000,10000]
+        # Scale cosine scores from [-1, 1] to [-10000, 10000].
         y = np.rint(np.clip(x, -1.0, 1.0) * 10000.0).astype(np.int16)
         return y
     raise ValueError(f"Unknown quant: {quant}")
@@ -191,7 +191,7 @@ def project_one_file_npz(
             indent=2,
         )
 
-    # We will build per-layer score arrays in chunks to avoid RAM spikes.
+    # Build per-layer score arrays in chunks to limit peak memory use.
     # For simplicity and good performance: accumulate as list of chunks (each chunk is (chunkN,K) in float16/int16)
     # then concat once per layer at end. This uses RAM proportional to one layer's scores, not CSV-size.
     layer_chunks: Dict[int, List[np.ndarray]] = {lid: [] for lid in layers}

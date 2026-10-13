@@ -4,13 +4,13 @@
 """
 OT-based context effect modeling (ordinal intensity bins) with:
   - per-value-item ordered category mapping
-  - correct NONE-state assignment
-  - NEW: per-state-pair counterfactual distribution shift recording (bin-wise Δ with CI)
+  - NONE-state assignment
+  - per-state-pair counterfactual distribution shift recording (bin-wise Δ with CI)
 
-For each (value_item, factor, state_a, state_b), we output:
+Outputs for each (value_item, factor, state_a, state_b):
   - OT (W1) posterior mean + CI
   - mean shift posterior mean + CI
-  - NEW: posterior mean distributions pA, pB and delta = pB - pA per bin (+ CI)
+  - posterior mean distributions pA, pB and delta = pB - pA per bin (+ CI)
 """
 
 from __future__ import annotations
@@ -304,7 +304,7 @@ def filter_value_items_by_count(samples: List[Sample], min_unique_sentences: int
 
 
 # -------------------------
-# Posterior OT + NEW distributional counterfactual summaries
+# Posterior OT and distributional counterfactual summaries
 # -------------------------
 def dirichlet_posterior_summary(
     counts_a: np.ndarray,
@@ -317,8 +317,8 @@ def dirichlet_posterior_summary(
     Returns a dict with:
       - OT mean + CI
       - mean-shift mean + CI (E[bin] difference)
-      - NEW: pA_mean, pB_mean (vectors)
-      - NEW: delta_mean, delta_q025, delta_q975 per bin where delta = pB - pA
+      - pA_mean, pB_mean (vectors)
+      - delta_mean, delta_q025, delta_q975 per bin where delta = pB - pA
     """
     pooled = counts_a + counts_b
     total = float(np.sum(pooled))
@@ -342,7 +342,7 @@ def dirichlet_posterior_summary(
     ots = np.empty((n_draws,), dtype=np.float64)
     shifts = np.empty((n_draws,), dtype=np.float64)
 
-    # NEW: per-draw deltas
+    # Per-draw deltas
     deltas = pB - pA  # shape (draws, K)
 
     for i in range(n_draws):
@@ -390,7 +390,7 @@ def main():
     ap.add_argument("--min_n_per_state", type=int, default=5)
     ap.add_argument("--min_value_item_count", type=int, default=200)
 
-    # NEW: include bin-wise distribution deltas in output CSV
+    # Include bin-wise distribution deltas in output CSV.
     ap.add_argument("--write_bin_deltas", action="store_true", default=True)
     ap.add_argument("--no_write_bin_deltas", dest="write_bin_deltas", action="store_false")
 

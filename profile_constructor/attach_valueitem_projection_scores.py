@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-attach_valueitem_projection_scores.py (tqdm + faster + error log)
+Attach per-value projection scores to annotated JSONL records.
 
-Speed fix:
+Array loading:
 - Preload all needed layer arrays from NPZ once (layer_arrays[lid] = (N,K) array)
 - Avoid repeated z["layer_x"] lookups inside loops.
 

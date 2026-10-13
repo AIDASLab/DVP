@@ -23,8 +23,8 @@ Each row -> one record:
   "raw_model_output": <str>
 }
 
-NEW OUTPUT FORMAT (STRICT)
---------------------------
+MODEL OUTPUT FORMAT (STRICT)
+----------------------------
 The model must output ONLY records in this exact format, one per extracted sentence:
 
 SENTENCE: <sentence text>
@@ -46,7 +46,7 @@ import pandas as pd
 from tqdm import tqdm
 
 # -------------------------------
-# Imports from your codebase
+# Inference backend
 # -------------------------------
 # The inference backend is imported when the extractor is constructed.
 
@@ -233,7 +233,7 @@ def _parse_records(raw: str) -> List[Dict[str, Any]]:
             if sent:
                 anns.append({"sentence": sent, "score": score, "type": typ})
 
-    # If we successfully parsed any one-line entries, keep them and also try block parsing
+    # Retain parsed one-line entries and also attempt block parsing.
     # (block parsing may add more).
     # 2) Block parsing: split by blank lines into record chunks.
     blocks = re.split(r"\n\s*\n+", s)
@@ -244,7 +244,7 @@ def _parse_records(raw: str) -> List[Dict[str, Any]]:
         if blk.upper() == "NONE":
             continue
 
-        # If this block is clearly a single-line record we already took, skip duplication
+        # Skip single-line records already included above.
         if _ONE_LINE_RE.match(blk.replace("\n", " ").strip()):
             # already covered by one-line parsing
             continue
