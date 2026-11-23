@@ -1,12 +1,12 @@
 # Aggregate profile examples
 
-Small, native-format examples for inspecting schemas and exercising the profile organizer without downloading the full bundle. These are actual aggregate records, not synthetic data. The separate `examples/profiles/run_smoke.py` remains the synthetic pipeline check.
+Use these small examples to explore profile formats and try the organizer before downloading the full bundle. They contain real aggregate records. For a synthetic pipeline check, use `examples/profiles/run_smoke.py`.
 
 The base and continuous-base examples cover **fairness**, **personal autonomy**, and **public safety** across seven CulturaX language groups: Arabic, German, French, Japanese, Korean, Russian, and Chinese. Each family contains 21 profiles.
 
-Each context and joint-relation family includes one fairness record per group (seven records per family). Relation JSON files retain one fairness anchor per group with all of that anchor's partners. These selections illustrate formats and language/value coverage; they are **not a statistically representative sample**, a benchmark split, or the full profiles for those values. The manifest records the exact selection and file counts.
+Each context and joint-relation family has one fairness record per group (seven per family). Relation JSON files keep one fairness anchor per group and all its partners. These selections show the formats and language/value coverage; they are not a representative sample, benchmark split, or complete profiles for those values. See the manifest for exact selections and counts.
 
-The 56 aggregate files occupy 119,027 bytes (about 116 KiB), excluding the manifest and this README. Counts of records across these different families are not counts of independent observations.
+The 56 data files take 119,027 bytes (about 116 KiB), excluding the manifest and README. Their record counts use different units and should not be added as independent observations.
 
 From the code repository root:
 
@@ -20,15 +20,14 @@ python -m profile_data.organize \
   --output-dir outputs/fairness_example
 ```
 
-Use a new output directory. See [the precomputed-profile guide](../../docs/precomputed_profiles.md) for native schemas, filters, support denominators, and full-bundle access.
+Use a new output directory each time. See the [profile guide](../../docs/precomputed_profiles.md) for schemas, support filters, and full-bundle access.
 
 ## Source and license
 
 These examples derive from [CulturaX](https://huggingface.co/datasets/uonlp/CulturaX)
-and contain aggregate statistics, not source texts or row-level annotations.
+and contain statistics, not source texts or sentence-level annotations.
 See [CulturaX, mC4, and OSCAR source terms](../../DATA.md#culturax-mc4-and-oscar).
-The aggregate profiles and their metadata are licensed under
-[CC BY 4.0](../../LICENSE-DATA) for the project's own contributions. Credit
-Woojin Kim and Jaeyoung Do and link to the project. See the
-[project licensing scope](../../DATA.md#project-licensing-status).
-This license does not grant rights to the underlying corpus.
+Profiles and metadata use [CC BY 4.0](../../LICENSE-DATA) for the project's own
+contributions. Credit Woojin Kim and Jaeyoung Do and link to the project.
+The license does not cover the underlying corpus; see the
+[license scope](../../DATA.md#project-licensing-status).

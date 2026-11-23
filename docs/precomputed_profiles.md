@@ -1,19 +1,19 @@
 # Using precomputed profiles
 
-The code repository includes small [aggregate examples](../examples/released_profiles/README.md). Full aggregates are packaged separately as a manifest plus gzip-compressed JSONL, CSV, and JSON files. Neither package contains source texts or row-level annotations.
+Start with the [bundled examples](../examples/released_profiles/README.md), or use a full profile bundle. Bundles contain gzip-compressed JSONL, CSV, and JSON files plus a manifest. They do not include source texts or sentence-level annotations.
 
-The organizer selects existing records; it does not run annotation, recompute statistics, or fill missing profiles. Local use requires only Python's standard library. Profiles and constructed catalogs are licensed under [CC BY 4.0](../LICENSE-DATA) for the project's own contributions. See [data licenses and source terms](../DATA.md) for attribution and scope.
+The organizer selects stored profiles without rerunning annotation or changing their statistics. It does not fill missing profiles. Local use needs only Python's standard library. Profiles and catalogs use [CC BY 4.0](../LICENSE-DATA) for the project's own contributions; see [DATA.md](../DATA.md) for attribution and source terms.
 
 ## Local examples and bundles
 
-Run from the code repository root. List available files before selecting:
+Run from the repository root. List the available profiles:
 
 ```bash
 python -m profile_data.organize \
   --source-dir examples/released_profiles --list
 ```
 
-Extract selected families, groups, and values into a new output directory:
+Select families, groups, and values into a new directory:
 
 ```bash
 python -m profile_data.organize \
@@ -24,26 +24,23 @@ python -m profile_data.organize \
   --output-dir outputs/profile_examples
 ```
 
-For a full local bundle, pass its directory containing `manifest.json` to `--source-dir`. Omit `--family`, `--group`, or `--value` to leave that dimension unrestricted. Repeated options select multiple exact names; value names are not fuzzy-matched or translated. Native group IDs retain suffixes such as `_cleaned`. Use a new output directory for each selection.
+For a full bundle, give `--source-dir` the directory containing `manifest.json`. Repeat `--family`, `--group`, or `--value` to select several names, or omit an option to include all available entries. Names must match exactly, including group suffixes such as `_cleaned`; value names are not translated. Each run needs a new output directory.
 
-`--list` reads the manifest only and accepts family/group filters, not value/support filters. Extraction checks selected files against their recorded sizes and hashes. Outputs keep the family/group layout without `.gz`, copy the supplied catalogs, and include a new `manifest.json` with output hashes and selection provenance.
+`--list` reads only the manifest and accepts family/group filters. Value and support filters apply when extracting profiles. The organizer checks file sizes and hashes, decompresses selected files, and copies the catalogs. A new manifest records the selection and output hashes.
 
 ## Hugging Face release
 
-The full aggregate bundle is coming soon on Hugging Face. The bundled examples
-can be used now with the commands above.
+The full bundle's public release is coming soon. The examples above are available now.
 
-The organizer also supports remote bundles through `--repo-id`, with
-`huggingface_hub` installed. `--source-dir` and `--repo-id` are alternatives.
-For a remote bundle, pin `--revision` to a commit for a fixed version; the
-organizer resolves remote revisions to a commit and records it as
-`source_bundle.resolved_commit` in the output manifest.
+Install `huggingface_hub` to use a remote bundle with `--repo-id` instead of
+`--source-dir`. Use `--revision` to choose a version. The organizer records the
+resolved commit as `source_bundle.resolved_commit` in the output manifest.
 
-The bundle is an archive of native aggregate formats, not a single tabular Hugging Face dataset configuration. `datasets.load_dataset` does not interpret this custom manifest; use the organizer or ordinary JSONL/CSV/JSON readers. Direct file retrieval is also covered by the [official Hugging Face download guide](https://huggingface.co/docs/huggingface_hub/guides/download).
+Use the organizer or ordinary JSONL/CSV/JSON readers for these files. `datasets.load_dataset` does not read the bundle's custom manifest. See the [Hugging Face download guide](https://huggingface.co/docs/huggingface_hub/guides/download) for direct downloads.
 
 ## Families and native schemas
 
-Manifest schema `profile-bundle-v1` has a `files` list. Each entry identifies its path, `family`, `group`, `format`, row count, byte size, SHA-256 digest, `value_field`, and `support_fields`. Full bundles store data as `data/<family>/<group>.<format>.gz`. Consult the manifest for the exact files and coverage in your version.
+The `profile-bundle-v1` manifest lists file paths, families, groups, formats, row counts, sizes, SHA-256 hashes, value fields, and support fields. Full-bundle paths follow `data/<family>/<group>.<format>.gz`. Check the manifest for the files available in your version.
 
 | Family | Format | Record meaning and principal fields |
 | --- | --- | --- |
@@ -56,13 +53,13 @@ Manifest schema `profile-bundle-v1` has a `files` list. Each entry identifies it
 | `context_relation_counts` | CSV | Partner/relation counts for an anchor's factor/state; `support_N_state` is the state's support |
 | `context_relation_deltas` | CSV | Partner/relation probability changes between an anchor's two factor states; `N_a`, `N_b` and delta summaries |
 
-Native columns and nested fields are retained rather than converted to one shared schema. CSV cells are serialized values; use the column names and family schema when converting numeric fields. The group in the manifest identifies the source file even when individual rows have no group column. Bundled catalogs under `resources/` describe values, expression categories, and context factors; the code repository also provides catalogs under `resources/original/`.
+Each family keeps its own columns and nested fields. CSV readers return strings, so convert numeric fields as needed. Use the manifest's group label when rows have no group column. Catalogs describe the values, expression categories, and context factors; they are under `resources/` in full bundles and `resources/original/` in the code repository.
 
-The full bundle uses the available filtered base profiles with `total_count > 200`. Family coverage differs: a group's presence in one family does not imply that every family or value exists for that group.
+Base profiles have `total_count > 200`. Group and value coverage varies by family.
 
 ## Support filters
 
-There is no universal support denominator. Request an explicit threshold for each selected family, for example:
+Support counts mean different things across families. Set a threshold for each family you select:
 
 ```bash
 python -m profile_data.organize \
@@ -78,14 +75,14 @@ python -m profile_data.organize \
 | `continuous_base` | `n_unique_sentences` |
 | `context`, `continuous_context`, `context_relation_ot`, `context_relation_deltas` | Both `N_a` and `N_b` |
 | `context_relation_counts` | `support_N_state` |
-| `relations` | Unsupported; no single support field is substituted |
+| `relations` | Not supported: no single support count |
 
-Filtering does not rebalance groups, renormalize distributions, recompute uncertainty, or rebuild relations. For `relations`, `--value` selects **anchor values only** and preserves all of each retained anchor's partners. Joint relation families also select by anchor, not partner.
+Filtering keeps the stored distributions and uncertainty estimates unchanged. It does not rebalance groups or rebuild relations. In relation families, `--value` selects anchors and keeps all their partners.
 
 ## Interpretation and rights
 
-Counts describe records used by the corresponding aggregate, not independent people. `n_samples` can include repeated sentence scores across factor/state records; it is not interchangeable with `n_unique_sentences`. Even sentence counts do not establish independent observations or representative population sampling. Continuous scores depend on their model and normalization; Gaussian summaries are not categorical probabilities. Context comparisons describe observed associations, not identified causal effects.
+Counts refer to the records used in each aggregate, not independent people. In continuous profiles, `n_samples` can repeat a sentence score across factor/state records; `n_unique_sentences` counts distinct sentences. Neither guarantees independent or representative observations. Continuous scores depend on the model and normalization, and Gaussian summaries are not categorical probabilities. Context comparisons show associations, not causal effects.
 
-Examples provide illustrative language/value coverage, not a statistically representative sample. Full means all available aggregates in the selected bundle version, not complete coverage of every source, value, or family.
+The examples illustrate formats and language/value coverage. A full bundle contains the available aggregates for that version, not every possible group–value combination.
 
-Read [DATA.md](../DATA.md) and each bundle's source-specific notices before redistribution. Original corpus access and aggregate redistribution are separate questions; removing source texts does not establish an automatic exemption from applicable rights or terms.
+Before sharing profiles, read [DATA.md](../DATA.md) and the bundle's source notices. Removing source text does not remove the source's rights or terms.

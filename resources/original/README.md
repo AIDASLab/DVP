@@ -7,26 +7,23 @@
 | `surface_value_regimes_gpt.jsonl` | Ordered expression categories for each value |
 | `context_factors_revised.json` | Default value-specific context factors and states |
 
-The launchers select `context_factors_revised.json` by default. Use the same
-chosen factor catalog for annotation, aggregation, and assembly.
+The launchers use `context_factors_revised.json` by default. Keep the same factor
+catalog across annotation, aggregation, and assembly.
 
-Definition coverage is a subset of the value list. By default, embedding matching
-uses the definition keys as candidates, and continuous scoring uses values
-present in both the definitions and vector index. Values without projection
-scores can still contribute to categorical profiles when their catalogs exist.
-The coverage checker reports this coverage separately.
+Not every value has a definition. Embedding matching uses definition keys by
+default, and continuous scoring needs both a definition and a value vector.
+Values without projection scores can still have categorical profiles if their
+catalog entries exist. The coverage checker reports these differences.
 
-Set `REPRESENTATIVES_JSON` to a compatible value-name list or definition
-dictionary to change the embedding candidate vocabulary independently.
+Use `REPRESENTATIVES_JSON` to choose a different value-name list or definition
+dictionary for embedding matching.
 
-Value, category, and factor names are matched exactly. Supply compatible
-replacement files through `VALUE_ITEMS_JSON`, `VALUE_DEFS_JSON`,
-`REGIMES_JSONL`, and `FACTORS_JSON`; individual Python modules also accept
-catalog paths. These files are not source-text datasets.
+Names must match exactly across stages. Set `VALUE_ITEMS_JSON`, `VALUE_DEFS_JSON`,
+`REGIMES_JSONL`, and `FACTORS_JSON` to use replacement catalogs. Individual Python
+modules also accept catalog paths. These files contain catalogs, not source texts.
 
 ## License
 
-The constructed catalog payloads are licensed under [CC BY 4.0](../../LICENSE-DATA).
-Credit Woojin Kim and Jaeyoung Do and link to the project. The license applies
-to the project's own contributions; source-corpus and third-party rights remain
-separate. See [DATA.md](../../DATA.md#project-licensing-status) for scope.
+The catalogs use [CC BY 4.0](../../LICENSE-DATA).
+Credit Woojin Kim and Jaeyoung Do and link to the project. Source-corpus and
+third-party rights remain separate; see [DATA.md](../../DATA.md#project-licensing-status).
