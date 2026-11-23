@@ -30,7 +30,9 @@ For a full bundle, give `--source-dir` the directory containing `manifest.json`.
 
 ## Hugging Face release
 
-The full bundle's public release is coming soon. The examples above are available now.
+The full bundle's public release is coming soon. We provide the full bundle;
+filtered subsets can be created locally with the code below. The examples above
+are available now.
 
 Install `huggingface_hub` to use a remote bundle with `--repo-id` instead of
 `--source-dir`. Use `--revision` to choose a version. The organizer records the
@@ -55,18 +57,22 @@ The `profile-bundle-v1` manifest lists file paths, families, groups, formats, ro
 
 Each family keeps its own columns and nested fields. CSV readers return strings, so convert numeric fields as needed. Use the manifest's group label when rows have no group column. Catalogs describe the values, expression categories, and context factors; they are under `resources/` in full bundles and `resources/original/` in the code repository.
 
-Base profiles have `total_count > 200`. Group and value coverage varies by family.
+Stored base profiles have `total_count > 200`. Some still include non-invocation
+categories under alternate labels, so that count is not always the invoked
+support. Group and value coverage varies by family.
 
 ## Support filters
 
-Support counts mean different things across families. Set a threshold for each family you select:
+Without a protocol, selection keeps all available records unless you request
+filters. Support counts mean different things across families. Set a threshold
+for each family you select:
 
 ```bash
 python -m profile_data.organize \
   --source-dir examples/released_profiles \
   --family base --family context --group culturax_ko_cleaned \
   --min-support base=500 --min-support context=50 \
-  --output-dir outputs/supported_profiles
+  --output-dir outputs/custom_support_profiles
 ```
 
 | Family | Field tested by `--min-support FAMILY=N` |
@@ -78,6 +84,53 @@ python -m profile_data.organize \
 | `relations` | Not supported: no single support count |
 
 Filtering keeps the stored distributions and uncertainty estimates unchanged. It does not rebalance groups or rebuild relations. In relation families, `--value` selects anchors and keeps all their partners.
+
+### Support protocol
+
+Use `--protocol support` to apply the following rules to a full bundle:
+
+| Family | Default rule |
+| --- | --- |
+| `base` | At least 200 invoked observations; omit profiles that retain a non-invocation category |
+| `continuous_base` | At least 200 unique sentences (`n_unique_sentences`) |
+| `context`, `continuous_context` | Both state supports at least 20 |
+| `context_relation_ot`, `context_relation_deltas` | Both state supports at least 20 relation events |
+| `context_relation_counts` | State support at least 20 relation events |
+| `relations` | Keep anchors with a qualifying categorical base profile in the same group |
+
+The protocol excludes unassigned uppercase `NONE` states, while keeping valid
+catalog states such as lowercase `none`. It checks core numerical fields and
+catalog state names. Profiles that retain non-invocation categories are excluded;
+their counts and probabilities are not rewritten.
+
+From the repository root, choose your downloaded full bundle:
+
+```bash
+read -r -p "Downloaded bundle directory: " DVP_BUNDLE_DIR
+python -m profile_data.organize \
+  --source-dir "$DVP_BUNDLE_DIR" \
+  --protocol support --base-support 200 --context-support 20 \
+  --output-dir outputs/supported_profiles
+```
+
+Change `--context-support 20` to `--context-support 30` for a stricter subset.
+`--base-support` controls both categorical and continuous base thresholds;
+`--min-support FAMILY=N` overrides the threshold for a selected family.
+These options apply only to local output; the source bundle stays unchanged.
+The output manifest records the filtering protocol and chosen thresholds.
+
+Context filtering uses the full bundle's context catalog. Relation filtering
+also needs the corresponding categorical base files, even when `base` is not
+selected for output. The bundled examples support the base-only protocol command
+in the [README](../README.md#use-the-full-bundle).
+
+The protocol keeps whole qualifying state distributions and comparisons,
+including rare relation cells. It does not select by effect size, significance,
+or Gaussian fit, and does not recompute or renormalize retained distributions.
+Malformed relation cells or inconsistent support counts cause an error, so a
+partial relation distribution is not saved.
+Support thresholds help exclude sparse records; they do not guarantee annotation
+accuracy or representative sampling.
 
 ## Interpretation and rights
 

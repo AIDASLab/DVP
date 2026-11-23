@@ -19,6 +19,8 @@ import sys
 import tempfile
 from decimal import Decimal, InvalidOperation
 
+from .filtering import SupportProtocol
+
 
 SCHEMA_VERSION = "profile-bundle-v1"
 # format, value field, and the support fields that must ALL meet a threshold.
@@ -247,7 +249,9 @@ def check_row(row: object, entry: dict, values: set[str], minimum: int | None) -
     return name, enough and (not values or name in values)
 
 
-def filter_file(source: Path, target: Path, entry: dict, values: set[str], minimum: int | None) -> tuple[int, set[str]]:
+def filter_file(source: Path, target: Path, entry: dict, values: set[str], minimum: int | None,
+                protocol: SupportProtocol | None = None,
+                relation_anchors: set[str] | None = None) -> tuple[int, set[str]]:
     seen = kept = 0
     matched = set()
     with open_text(source) as stream, target.open("w", encoding="utf-8", newline="") as out:
@@ -258,6 +262,8 @@ def filter_file(source: Path, target: Path, entry: dict, values: set[str], minim
                 row = json.loads(line, parse_constant=reject_constant)
                 seen += 1
                 name, keep = check_row(row, entry, values, minimum)
+                if keep and protocol is not None:
+                    keep = protocol.keep(entry["family"], row, minimum)
                 if keep:
                     # Keep the original serialized values as well as the statistics.
                     out.write(line.rstrip("\r\n") + "\n")
@@ -272,11 +278,24 @@ def filter_file(source: Path, target: Path, entry: dict, values: set[str], minim
                 raise BundleError(f"Invalid CSV header in {entry['path']}")
             writer = csv.DictWriter(out, fieldnames=fields)
             writer.writeheader()
+            state_supports = {}
             for row in reader:
                 if None in row or any(v is None for v in row.values()):
                     raise BundleError(f"Malformed CSV row in {entry['path']}")
                 seen += 1
                 name, keep = check_row(row, entry, values, minimum)
+                if protocol is not None and entry["family"] in {"context_relation_counts", "context_relation_deltas"}:
+                    state_fields = (["state"] if entry["family"] == "context_relation_counts"
+                                    else ["state_a", "state_b"])
+                    parent_fields = ["anchor_value", "factor", *state_fields]
+                    if not all(isinstance(row.get(k), str) and row[k] for k in parent_fields):
+                        raise BundleError(f"Missing relation-cell parent keys in {entry['path']}")
+                    key = tuple(row[k] for k in parent_fields)
+                    support = tuple(Decimal(str(row[k])) for k in entry["support_fields"])
+                    if state_supports.setdefault(key, support) != support:
+                        raise BundleError(f"Inconsistent support within a relation state/comparison in {entry['path']}")
+                if keep and protocol is not None:
+                    keep = protocol.keep(entry["family"], row, minimum)
                 if keep:
                     writer.writerow(row)
                     kept += 1
@@ -290,7 +309,13 @@ def filter_file(source: Path, target: Path, entry: dict, values: set[str], minim
                 raise BundleError(f"Invalid relation anchor in {entry['path']}")
             seen = len(anchors)
             document["value_relations"] = {
-                name: partners for name, partners in anchors.items() if not values or name in values
+                name: partners for name, partners in anchors.items()
+                if (not values or name in values) and (
+                    protocol is None or (
+                        relation_anchors is not None and name in relation_anchors
+                        and protocol.keep_relation(partners)
+                    )
+                )
             }
             matched.update(document["value_relations"])
             kept = len(matched)
@@ -347,16 +372,76 @@ def organize(source: Source, manifest: dict, manifest_hash: str, selected: list[
     stage = Path(tempfile.mkdtemp(prefix=f".{output.name}.staging-", dir=output.parent))
     claimed_output = False
     try:
+        verified = {}
+
+        def verified_path(entry: dict) -> Path:
+            relative = entry["path"]
+            if relative not in verified:
+                path = source.get(relative)
+                size, checksum = digest(path)
+                if size != entry["bytes"] or checksum != entry["sha256"]:
+                    raise BundleError(f"Size or SHA-256 mismatch for {relative}")
+                verified[relative] = path
+            return verified[relative]
+
         values = set(args.value or [])
         matched_values = set()
         matched_groups = set()
         files = []
         catalogs = [e for e in manifest["files"] if e["family"] == "catalog"]
+        protocol = None
+        relation_anchors = {}
+        retention = []
+        if args.protocol is not None:
+            allowed = None
+            contextual = set(FAMILIES) - {"base", "continuous_base", "relations"}
+            if any(e["family"] in contextual for e in selected):
+                context_catalog = next((e for e in catalogs if e["path"].removesuffix(".gz")
+                                        == "resources/context_factors_revised.json"), None)
+                if context_catalog is None:
+                    raise BundleError("The support protocol needs the context catalog resources/context_factors_revised.json[.gz] "
+                                      "in the bundle to validate context states")
+                with open_text(verified_path(context_catalog)) as stream:
+                    catalog = json.load(stream, parse_constant=reject_constant)
+                if not isinstance(catalog, dict) or not isinstance(catalog.get("items"), dict):
+                    raise BundleError("The context catalog must contain an items object")
+                allowed = {}
+                for value, obj in catalog["items"].items():
+                    if not isinstance(obj, dict) or not isinstance(obj.get("factors"), list):
+                        raise BundleError(f"Missing factors list in context catalog for {value!r}")
+                    for factor in obj["factors"]:
+                        if (not isinstance(factor, dict) or not isinstance(factor.get("factor"), str)
+                                or not isinstance(factor.get("states"), list)
+                                or not all(isinstance(s, str) for s in factor["states"])):
+                            raise BundleError(f"Malformed context factor for {value!r}")
+                        allowed.setdefault((value, factor["factor"]), set()).update(factor["states"])
+            protocol = SupportProtocol(
+                base_support=args.base_support if args.base_support is not None else 200,
+                context_support=args.context_support if args.context_support is not None else 20,
+                allowed_states=allowed,
+            )
+            relation_groups = {e["group"] for e in selected if e["family"] == "relations"}
+            for group in sorted(relation_groups):
+                base_entry = next((e for e in manifest["files"]
+                                   if e["family"] == "base" and e["group"] == group), None)
+                if base_entry is None:
+                    raise BundleError(f"The support protocol needs a categorical base file for relation group {group!r}")
+                names = set()
+                seen = 0
+                with open_text(verified_path(base_entry)) as stream:
+                    for line in stream:
+                        if not line.strip():
+                            continue
+                        row = json.loads(line, parse_constant=reject_constant)
+                        seen += 1
+                        name, _ = check_row(row, base_entry, set(), None)
+                        if protocol.eligible_base(row, minimums.get("base")):
+                            names.add(name)
+                if seen != base_entry["rows"]:
+                    raise BundleError(f"Manifest row count mismatch for {base_entry['path']}: {base_entry['rows']} != {seen}")
+                relation_anchors[group] = names
         for entry in selected + catalogs:
-            path = source.get(entry["path"])
-            size, checksum = digest(path)
-            if size != entry["bytes"] or checksum != entry["sha256"]:
-                raise BundleError(f"Size or SHA-256 mismatch for {entry['path']}")
+            path = verified_path(entry)
             relative = entry["path"].removesuffix(".gz")
             target = stage / relative
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -365,7 +450,11 @@ def organize(source: Source, manifest: dict, manifest_hash: str, selected: list[
                 copy_catalog(path, target, entry)
                 rows = entry["rows"]
             else:
-                rows, names = filter_file(path, target, entry, values, minimums.get(entry["family"]))
+                rows, names = filter_file(path, target, entry, values, minimums.get(entry["family"]),
+                                          protocol, relation_anchors.get(entry["group"]))
+                if protocol is not None:
+                    retention.append({"family": entry["family"], "group": entry["group"],
+                                      "input_rows": entry["rows"], "output_rows": rows})
                 matched_values.update(names)
                 if not rows:
                     target.unlink()
@@ -390,6 +479,11 @@ def organize(source: Source, manifest: dict, manifest_hash: str, selected: list[
             "groups": sorted(set(args.group or [])),
             "values": sorted(values), "min_support": minimums,
         }
+        if protocol is not None:
+            result["selection"]["filtering_protocol"] = {
+                **protocol.metadata(), "min_support_overrides": minimums,
+            }
+            result["selection"]["retention"] = retention
         result["source_bundle"] = {"manifest_sha256": manifest_hash}
         if "selection" in manifest:
             result["source_bundle"]["selection"] = manifest["selection"]
@@ -432,6 +526,9 @@ def parser() -> argparse.ArgumentParser:
     ap.add_argument("--group", action="append", help="Repeat to select exact group IDs")
     ap.add_argument("--value", action="append", help="Repeat to select exact values (relation anchor keys only)")
     ap.add_argument("--min-support", action="append", default=[], metavar="FAMILY=N", help="Repeat per family; all registered support fields must be >=N; unavailable for relations/catalogs")
+    ap.add_argument("--protocol", choices=["support"], help="Apply the optional support and assigned-state filtering protocol")
+    ap.add_argument("--base-support", type=int, help="Protocol base threshold (default: 200); requires --protocol support")
+    ap.add_argument("--context-support", type=int, help="Protocol per-state threshold (default: 20); requires --protocol support")
     return ap
 
 
@@ -439,8 +536,12 @@ def main(argv: list[str] | None = None) -> int:
     ap = parser()
     args = ap.parse_args(argv)
     try:
-        if args.list and (args.value or args.min_support):
-            raise BundleError("--list is manifest-only; value/support filters require --output-dir")
+        if args.list and (args.value or args.min_support or args.protocol):
+            raise BundleError("--list is manifest-only; value/support/protocol filters require --output-dir")
+        if args.protocol is None and (args.base_support is not None or args.context_support is not None):
+            raise BundleError("--base-support and --context-support require --protocol support")
+        if any(n is not None and n < 0 for n in (args.base_support, args.context_support)):
+            raise BundleError("Protocol support thresholds must be nonnegative integers")
         if args.value and any(not value for value in args.value):
             raise BundleError("--value cannot be empty")
         source = Source(args)

@@ -69,6 +69,22 @@ The full dataset's public release on Hugging Face is coming soon. If you already
 have a local bundle, pass the directory containing `manifest.json` to `--source-dir`.
 The same commands work with the examples and full dataset.
 
+We provide the full bundle. Create a filtered subset locally with the optional
+support protocol, rather than downloading a separate filtered version. Try it
+on the bundled categorical examples:
+
+```bash
+python -m profile_data.organize \
+  --source-dir examples/released_profiles --family base \
+  --protocol support \
+  --output-dir outputs/supported_examples
+```
+
+For the full bundle, the protocol defaults to at least 200 observations for base
+profiles and 20 per context state. It excludes unassigned context states and
+keeps the retained statistics unchanged. Thresholds are configurable; see the
+[filtering protocol](docs/precomputed_profiles.md#support-protocol).
+
 The organizer checks file hashes before selecting profiles. Repeat `--family`,
 `--group`, or `--value` to select several names. Support thresholds use different
 counts for each family, and filtering keeps the stored statistics unchanged.
