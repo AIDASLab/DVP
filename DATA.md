@@ -12,6 +12,9 @@ are distributed separately; see the [profile guide](docs/precomputed_profiles.md
 Neither package includes Reddit/CulturaX source records, sentence-level
 annotations, or model weights.
 
+Released profiles cover Reddit and CulturaX groups. The source terms below
+remain separate from the project licenses.
+
 ## Source-data licenses and terms
 
 Use the terms for your source version and access method. The upstream notices
@@ -65,8 +68,7 @@ Copyright (c) 2026 Woojin Kim and Jaeyoung Do.
   rights and are not covered by these two licenses.
 
 CC BY covers only rights the project owns or may grant. Source-corpus rights
-remain separate, including unresolved attribution and terms for the additional
-Korean sources in the full bundle. Models and dependencies keep their own licenses.
+remain separate. Models and dependencies keep their own licenses.
 See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the ValueBench-derived
 model adapter's upstream MIT notice.
 

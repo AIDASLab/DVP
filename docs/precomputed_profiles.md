@@ -30,13 +30,13 @@ For a full bundle, give `--source-dir` the directory containing `manifest.json`.
 
 ## Hugging Face release
 
-The full bundle is hosted at
+The full bundle is available at
 [darklightened/DVP](https://huggingface.co/datasets/darklightened/DVP).
-It is currently private; public release is coming soon. We provide the full
-bundle, with filtering available in code. The examples above are available now.
+We provide the full Reddit and CulturaX aggregate bundle, with filtering
+available in code. The examples above are included in the code repository.
 
 Install `huggingface_hub` to use a remote bundle with `--repo-id` instead of
-`--source-dir`. Users with access can use `--repo-id darklightened/DVP`.
+`--source-dir`. Use `--repo-id darklightened/DVP` for the released profiles.
 Use `--revision` to choose a version. The organizer records the
 resolved commit as `source_bundle.resolved_commit` in the output manifest.
 

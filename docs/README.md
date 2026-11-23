@@ -28,8 +28,8 @@ computer first. Stop the preview with Ctrl+C.
   walkthrough with example sentences, annotations, scores, and profiles.
   It can be hidden and starts collapsed for reduced motion or without JavaScript.
 
-The page describes the paper's 21 study groups. The aggregate bundle covers a
-different set of source groups. Training and steering results are from the paper.
+The page describes the paper's 21 study groups. The aggregate bundle covers
+22 Reddit and CulturaX groups. Training and steering results are from the paper.
 
 The design is inspired by the [VALUEFLOW project page](https://aidaslab.github.io/VALUEFLOW/).
 See [`DATA.md`](../DATA.md) for licenses and source terms.
@@ -38,8 +38,8 @@ See [`DATA.md`](../DATA.md) for licenses and source terms.
 
 The [NeurIPS 2026 conference page](https://neurips.cc/virtual/2026/loc/sydney/poster/154170)
 and [Hugging Face dataset repository](https://huggingface.co/datasets/darklightened/DVP)
-are linked from the project page. The dataset is currently private; its public
-release is coming soon.
+are linked from the project page. The full aggregate dataset is available on
+Hugging Face; create filtered subsets locally with the organizer.
 
 The paper PDF, model-training code, and steering code are coming soon. The current
 code release covers data processing, annotation, and profile construction.
