@@ -36,6 +36,10 @@ See [`DATA.md`](../DATA.md) for licenses and source terms.
 
 ## Availability
 
-The public paper, full Hugging Face aggregate bundle, and model-training and
-steering code are coming soon. The current code release covers data processing,
-annotation, and profile construction.
+The [NeurIPS 2026 conference page](https://neurips.cc/virtual/2026/loc/sydney/poster/154170)
+and [Hugging Face dataset repository](https://huggingface.co/datasets/darklightened/DVP)
+are linked from the project page. The dataset is currently private; its public
+release is coming soon.
+
+The paper PDF, model-training code, and steering code are coming soon. The current
+code release covers data processing, annotation, and profile construction.

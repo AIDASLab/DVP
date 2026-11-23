@@ -7,6 +7,10 @@ and contexts.
 Use the provided profiles or build your own from prepared text. You can choose
 the models, catalogs, and processing settings.
 
+[NeurIPS 2026 page](https://neurips.cc/virtual/2026/loc/sydney/poster/154170) ·
+[Hugging Face profiles](https://huggingface.co/datasets/darklightened/DVP)
+(private; public release coming soon)
+
 ![Overview of Distributional Value Profiling: extract value signals from text, construct distributions, predict profiles, and steer model outputs.](docs/assets/figures/framework.png)
 
 The paper's framework. This release includes data processing, annotation, and
@@ -23,7 +27,7 @@ The hosted page is coming soon. See the [site guide](docs/README.md) to preview 
 | --- | --- |
 | Data preparation, annotation, and profile construction | Code in this repository; see the [workflow guide](docs/workflow.md) |
 | Example profiles | [Bundled examples](examples/released_profiles/README.md), about **0.15 MiB** |
-| Full aggregate profiles | Coming soon on Hugging Face; about **779 MiB compressed** |
+| Full aggregate profiles | [Hugging Face](https://huggingface.co/datasets/darklightened/DVP), currently private; public release coming soon; about **779 MiB compressed** |
 | Profile download and selection | [`profile_data.organize`](profile_data/organize.py); see the [precomputed-profile guide](docs/precomputed_profiles.md) |
 | Constructed value and context catalogs | [`resources/original/`](resources/original/README.md) |
 
@@ -65,8 +69,10 @@ directory for each run; existing directories are not overwritten.
 
 ### Use the full bundle
 
-The full dataset's public release on Hugging Face is coming soon. If you already
-have a local bundle, pass the directory containing `manifest.json` to `--source-dir`.
+The full dataset is at [darklightened/DVP on Hugging Face](https://huggingface.co/datasets/darklightened/DVP).
+It is currently private; public release is coming soon. With access, use
+`--repo-id darklightened/DVP`. For a local bundle, pass the directory containing
+`manifest.json` to `--source-dir`.
 The same commands work with the examples and full dataset.
 
 We provide the full bundle. Create a filtered subset locally with the optional

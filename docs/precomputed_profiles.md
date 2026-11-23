@@ -30,12 +30,14 @@ For a full bundle, give `--source-dir` the directory containing `manifest.json`.
 
 ## Hugging Face release
 
-The full bundle's public release is coming soon. We provide the full bundle;
-filtered subsets can be created locally with the code below. The examples above
-are available now.
+The full bundle is hosted at
+[darklightened/DVP](https://huggingface.co/datasets/darklightened/DVP).
+It is currently private; public release is coming soon. We provide the full
+bundle, with filtering available in code. The examples above are available now.
 
 Install `huggingface_hub` to use a remote bundle with `--repo-id` instead of
-`--source-dir`. Use `--revision` to choose a version. The organizer records the
+`--source-dir`. Users with access can use `--repo-id darklightened/DVP`.
+Use `--revision` to choose a version. The organizer records the
 resolved commit as `source_bundle.resolved_commit` in the output manifest.
 
 Use the organizer or ordinary JSONL/CSV/JSON readers for these files. `datasets.load_dataset` does not read the bundle's custom manifest. See the [Hugging Face download guide](https://huggingface.co/docs/huggingface_hub/guides/download) for direct downloads.
