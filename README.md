@@ -8,7 +8,7 @@ Use the provided profiles or build your own from prepared text. You can choose
 the models, catalogs, and processing settings.
 
 [NeurIPS 2026 page](https://neurips.cc/virtual/2026/loc/sydney/poster/154170) ·
-[Hugging Face profiles](https://huggingface.co/datasets/darklightened/DVP)
+[Hugging Face profiles](https://huggingface.co/datasets/snu-aidas/DVP)
 
 ![Overview of Distributional Value Profiling: extract value signals from text, construct distributions, predict profiles, and steer model outputs.](docs/assets/figures/framework.png)
 
@@ -26,7 +26,7 @@ The hosted page is coming soon. See the [site guide](docs/README.md) to preview 
 | --- | --- |
 | Data preparation, annotation, and profile construction | Code in this repository; see the [workflow guide](docs/workflow.md) |
 | Example profiles | [Bundled examples](examples/released_profiles/README.md), about **0.15 MiB** |
-| Full aggregate profiles | [Hugging Face](https://huggingface.co/datasets/darklightened/DVP), about **724 MiB compressed** |
+| Full aggregate profiles | [Hugging Face](https://huggingface.co/datasets/snu-aidas/DVP), about **724 MiB compressed** |
 | Profile download and selection | [`profile_data.organize`](profile_data/organize.py); see the [precomputed-profile guide](docs/precomputed_profiles.md) |
 | Constructed value and context catalogs | [`resources/original/`](resources/original/README.md) |
 
@@ -69,8 +69,8 @@ directory for each run; existing directories are not overwritten.
 
 ### Use the full bundle
 
-The full dataset is available at [darklightened/DVP on Hugging Face](https://huggingface.co/datasets/darklightened/DVP).
-Use `--repo-id darklightened/DVP` for remote access. For a local bundle, pass the directory containing
+The full dataset is available at [snu-aidas/DVP on Hugging Face](https://huggingface.co/datasets/snu-aidas/DVP).
+Use `--repo-id snu-aidas/DVP` for remote access. For a local bundle, pass the directory containing
 `manifest.json` to `--source-dir`.
 The same commands work with the examples and full dataset.
 

@@ -37,7 +37,7 @@ See [`DATA.md`](../DATA.md) for licenses and source terms.
 ## Availability
 
 The [NeurIPS 2026 conference page](https://neurips.cc/virtual/2026/loc/sydney/poster/154170)
-and [Hugging Face dataset repository](https://huggingface.co/datasets/darklightened/DVP)
+and [Hugging Face dataset repository](https://huggingface.co/datasets/snu-aidas/DVP)
 are linked from the project page. The full aggregate dataset is available on
 Hugging Face; create filtered subsets locally with the organizer.
 
