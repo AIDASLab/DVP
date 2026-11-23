@@ -23,3 +23,10 @@ Value, category, and factor names are matched exactly. Supply compatible
 replacement files through `VALUE_ITEMS_JSON`, `VALUE_DEFS_JSON`,
 `REGIMES_JSONL`, and `FACTORS_JSON`; individual Python modules also accept
 catalog paths. These files are not source-text datasets.
+
+## License
+
+The constructed catalog payloads are licensed under [CC BY 4.0](../../LICENSE-DATA).
+Credit Woojin Kim and Jaeyoung Do and link to the project. The license applies
+to the project's own contributions; source-corpus and third-party rights remain
+separate. See [DATA.md](../../DATA.md#project-licensing-status) for scope.

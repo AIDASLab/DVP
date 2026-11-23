@@ -57,14 +57,29 @@ No CulturaX, mC4, or OSCAR source records are redistributed here.
 
 ## Project licensing status
 
-Project code/catalog and aggregate-data licenses have not yet been assigned.
-Source-specific redistribution conditions for the full bundle have not yet been
-specified. No project code/catalog or aggregate-data license is currently granted.
-The source notices above are not a substitute for those licenses and do not extend
-rights held by third parties. Aggregation and omission of source texts do not
-automatically establish redistribution permission. Third-party model and
-dependency licenses remain separate. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
-for the ValueBench-derived model adapter's upstream MIT notice.
+Copyright (c) 2026 Woojin Kim and Jaeyoung Do.
+
+- **Software:** the project's code and accompanying usage documentation are
+  licensed under the [MIT License](LICENSE), except for the data, catalogs,
+  and visual assets identified below. Existing third-party notices apply to
+  their respective components.
+- **Profiles and catalogs:** aggregate data and metadata under
+  `examples/released_profiles/`, constructed catalog payloads under
+  `resources/original/`, and the corresponding full HF profile/catalog bundle
+  are licensed under [CC BY 4.0](LICENSE-DATA) for the project's own copyright
+  and database contributions. Suggested credit: Woojin Kim and Jaeyoung Do,
+  *Distributional Value Profiling*, with a link to the project or dataset.
+- **Paper visuals:** the paper figures and illustrative animation under
+  `docs/assets/figures/` and `docs/assets/animations/` retain their existing
+  rights; neither license above grants additional rights to those assets.
+
+The CC BY grant covers only rights the project owns or is authorized to grant.
+It does not license underlying Reddit/CulturaX records or extend rights held by
+third parties. Source-specific redistribution questions remain separate,
+including unresolved attribution and terms for additional Korean sources in
+the full bundle. Third-party model and dependency licenses also remain separate.
+See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the ValueBench-derived
+model adapter's upstream MIT notice.
 
 ## Local inputs and generated outputs
 

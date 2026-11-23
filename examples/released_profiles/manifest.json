@@ -1,7 +1,14 @@
 {
   "schema_version": "profile-bundle-v1",
   "package_id": "native-aggregate-profile-examples-v1",
-  "license_status": "unassigned",
+  "license_status": "CC-BY-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "license_scope": "Project-owned aggregate profiles, catalogs and dataset metadata; underlying corpus and third-party rights remain separate",
+  "attribution": {
+    "creators": ["Woojin Kim", "Jaeyoung Do"],
+    "title": "Distributional Value Profile Aggregate Examples",
+    "source": "https://github.com/Darklightened/DVP/tree/main/examples/released_profiles"
+  },
   "content": "Existing aggregate statistics; no corpus text, row-level annotations, or raw activation arrays",
   "groups": {
     "culturax_ar_cleaned": {

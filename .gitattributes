@@ -1,0 +1,2 @@
+# Preserve the official CC legal text's final blank line.
+LICENSE-DATA whitespace=-blank-at-eof

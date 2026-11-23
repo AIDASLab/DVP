@@ -27,6 +27,8 @@ Use a new output directory. See [the precomputed-profile guide](../../docs/preco
 These examples derive from [CulturaX](https://huggingface.co/datasets/uonlp/CulturaX)
 and contain aggregate statistics, not source texts or row-level annotations.
 See [CulturaX, mC4, and OSCAR source terms](../../DATA.md#culturax-mc4-and-oscar).
-An aggregate-data license has not yet been assigned; see the
-[project licensing status](../../DATA.md#project-licensing-status).
-Providing these examples does not grant rights to the underlying corpus.
+The aggregate profiles and their metadata are licensed under
+[CC BY 4.0](../../LICENSE-DATA) for the project's own contributions. Credit
+Woojin Kim and Jaeyoung Do and link to the project. See the
+[project licensing scope](../../DATA.md#project-licensing-status).
+This license does not grant rights to the underlying corpus.

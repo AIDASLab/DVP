@@ -191,7 +191,12 @@ rights. CulturaX follows the terms of its mC4 and OSCAR sources; OSCAR's CC0
 notice does not cover the underlying crawled text. See the linked upstream
 notices in [source-data licenses and terms](DATA.md#source-data-licenses-and-terms).
 
-Project code/catalog and aggregate-data licenses have not yet been assigned.
-This repository does not grant additional rights to source corpora, and
-aggregation alone does not establish redistribution permission. See
-[DATA.md](DATA.md) and the [example notice](examples/released_profiles/README.md).
+Software and accompanying usage documentation are licensed under [MIT](LICENSE).
+Constructed value/context catalogs and aggregate profiles, including the bundled
+examples, are licensed under [CC BY 4.0](LICENSE-DATA) for the project's own
+contributions. Paper figures and the illustrative animation retain their
+existing rights and are outside these license grants.
+
+Source-corpus and other third-party rights remain separate. See
+[DATA.md](DATA.md#project-licensing-status), the [example notice](examples/released_profiles/README.md),
+and [third-party notices](THIRD_PARTY_NOTICES.md) for scope and attribution.

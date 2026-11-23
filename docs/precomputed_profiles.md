@@ -2,7 +2,7 @@
 
 The code repository includes small [aggregate examples](../examples/released_profiles/README.md). Full aggregates are packaged separately as a manifest plus gzip-compressed JSONL, CSV, and JSON files. Neither package contains source texts or row-level annotations.
 
-The organizer selects existing records; it does not run annotation, recompute statistics, or fill missing profiles. Local use requires only Python's standard library. See [data licenses and source terms](../DATA.md) before reusing or redistributing profiles.
+The organizer selects existing records; it does not run annotation, recompute statistics, or fill missing profiles. Local use requires only Python's standard library. Profiles and constructed catalogs are licensed under [CC BY 4.0](../LICENSE-DATA) for the project's own contributions. See [data licenses and source terms](../DATA.md) for attribution and scope.
 
 ## Local examples and bundles
 
