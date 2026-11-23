@@ -28,5 +28,5 @@ These examples derive from [CulturaX](https://huggingface.co/datasets/uonlp/Cult
 and contain aggregate statistics, not source texts or row-level annotations.
 See [CulturaX, mC4, and OSCAR source terms](../../DATA.md#culturax-mc4-and-oscar).
 An aggregate-data license has not yet been assigned; see the
-[licensing TODO](../../DATA.md#project-licensing-status).
+[project licensing status](../../DATA.md#project-licensing-status).
 Providing these examples does not grant rights to the underlying corpus.

@@ -24,31 +24,20 @@ python -m profile_data.organize \
   --output-dir outputs/profile_examples
 ```
 
-For a full local bundle, replace the source path with its directory containing `manifest.json`, for example `/path/to/profile-bundle`. Omit `--family`, `--group`, or `--value` to leave that dimension unrestricted. Repeated options select multiple exact names; value names are not fuzzy-matched or translated. Native group IDs retain suffixes such as `_cleaned`. Use a new output directory for each selection.
+For a full local bundle, pass its directory containing `manifest.json` to `--source-dir`. Omit `--family`, `--group`, or `--value` to leave that dimension unrestricted. Repeated options select multiple exact names; value names are not fuzzy-matched or translated. Native group IDs retain suffixes such as `_cleaned`. Use a new output directory for each selection.
 
 `--list` reads the manifest only and accepts family/group filters, not value/support filters. Extraction checks selected files against their recorded sizes and hashes. Outputs keep the family/group layout without `.gz`, copy the supplied catalogs, and include a new `manifest.json` with output hashes and selection provenance.
 
-## Download from Hugging Face
+## Hugging Face release
 
-Remote access additionally requires:
+The full aggregate bundle is coming soon on Hugging Face. The bundled examples
+can be used now with the commands above.
 
-```bash
-python -m pip install huggingface_hub
-```
-
-**TODO: publish the full bundle, add its Hugging Face dataset URL, and replace `YOUR_ORG/YOUR_DATASET`.**
-The following command is a template until that dataset is available:
-
-```bash
-python -m profile_data.organize \
-  --repo-id YOUR_ORG/YOUR_DATASET \
-  --revision main \
-  --cache-dir outputs/profile_cache \
-  --family base --group culturax_ko_cleaned --value fairness \
-  --output-dir outputs/korean_fairness
-```
-
-`--source-dir` and `--repo-id` are alternatives. Pin `--revision` to a commit for a fixed remote version; the organizer resolves remote revisions to a commit and records it as `source_bundle.resolved_commit` in the output manifest.
+The organizer also supports remote bundles through `--repo-id`, with
+`huggingface_hub` installed. `--source-dir` and `--repo-id` are alternatives.
+For a remote bundle, pin `--revision` to a commit for a fixed version; the
+organizer resolves remote revisions to a commit and records it as
+`source_bundle.resolved_commit` in the output manifest.
 
 The bundle is an archive of native aggregate formats, not a single tabular Hugging Face dataset configuration. `datasets.load_dataset` does not interpret this custom manifest; use the organizer or ordinary JSONL/CSV/JSON readers. Direct file retrieval is also covered by the [official Hugging Face download guide](https://huggingface.co/docs/huggingface_hub/guides/download).
 
@@ -77,7 +66,7 @@ There is no universal support denominator. Request an explicit threshold for eac
 
 ```bash
 python -m profile_data.organize \
-  --source-dir /path/to/profile-bundle \
+  --source-dir examples/released_profiles \
   --family base --family context --group culturax_ko_cleaned \
   --min-support base=500 --min-support context=50 \
   --output-dir outputs/supported_profiles

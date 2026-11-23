@@ -5,9 +5,9 @@
 Users supply their own prepared CSV/JSONL corpora. No Reddit or CulturaX source
 records, row-level annotations, or model weights are included.
 
-**TODO: add source-specific acquisition and preparation instructions.** The
-current workflow starts with locally prepared data obtained through authorized
-access to the relevant source.
+The current workflow starts with locally prepared data obtained through
+authorized access to the relevant source. Source-specific acquisition and
+preparation instructions are coming soon.
 
 Small actual aggregate examples are provided in
 [`examples/released_profiles/`](examples/released_profiles/README.md); they illustrate
@@ -57,15 +57,14 @@ No CulturaX, mC4, or OSCAR source records are redistributed here.
 
 ## Project licensing status
 
-- **TODO:** select and add a license for the project code and constructed catalogs.
-- **TODO:** specify the aggregate-profile license and source-specific redistribution
-  conditions, including attribution and terms for other source groups in the full bundle.
-
-No project code/catalog or aggregate-data license is currently granted. The
-source notices above are not a substitute for those licenses and do not extend
+Project code/catalog and aggregate-data licenses have not yet been assigned.
+Source-specific redistribution conditions for the full bundle have not yet been
+specified. No project code/catalog or aggregate-data license is currently granted.
+The source notices above are not a substitute for those licenses and do not extend
 rights held by third parties. Aggregation and omission of source texts do not
 automatically establish redistribution permission. Third-party model and
-dependency licenses remain separate.
+dependency licenses remain separate. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
+for the ValueBench-derived model adapter's upstream MIT notice.
 
 ## Local inputs and generated outputs
 

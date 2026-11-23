@@ -9,13 +9,25 @@ You can use existing profiles without rerunning annotation, or build profiles
 from your own prepared text. Annotation models, intensity models, catalogs, and
 processing settings are configurable.
 
+![Overview of Distributional Value Profiling: extract value signals from text, construct distributions, predict profiles, and steer model outputs.](docs/assets/figures/framework.png)
+
+Overview of the paper's framework. The current code release covers data
+processing, annotation, and profile construction; profiling-model training and
+steering code are coming soon.
+
+## Project page
+
+The [project-page source](docs/index.html) includes the paper overview, figures,
+findings, and citation. The hosted page is coming soon; see the
+[site guide](docs/README.md) for local preview.
+
 ## What is included
 
 | Component | Location / availability |
 | --- | --- |
 | Data preparation, annotation, and profile construction | Code in this repository; see the [workflow guide](docs/workflow.md) |
 | Small actual aggregate examples | [Bundled examples](examples/released_profiles/README.md), about **0.15 MiB** including their manifest and documentation |
-| Full aggregate profiles | About **779 MiB compressed**; **TODO: publish the Hugging Face dataset and add its link** |
+| Full aggregate profiles | Coming soon on Hugging Face; about **779 MiB compressed** |
 | Profile download and selection | [`profile_data.organize`](profile_data/organize.py); see the [precomputed-profile guide](docs/precomputed_profiles.md) |
 | Constructed value and context catalogs | [`resources/original/`](resources/original/README.md) |
 
@@ -68,33 +80,12 @@ Use a new output directory for each run; existing directories are not overwritte
 
 ### Use the full bundle
 
-For a downloaded or locally prepared bundle, pass its directory containing
-`manifest.json` to `--source-dir`. The same selection commands work on the full
-bundle and the examples.
+The full aggregate bundle is coming soon on Hugging Face. For an existing local
+bundle, pass its directory containing `manifest.json` to `--source-dir`. The same
+selection commands work on the full bundle and the examples.
 
-Hugging Face retrieval additionally requires:
-
-```bash
-python -m pip install huggingface_hub
-```
-
-**TODO: add the Hugging Face dataset URL and replace `YOUR_ORG/YOUR_DATASET`.**
-The following command is a template; the full dataset is not yet available for
-download from this project.
-
-```bash
-python -m profile_data.organize \
-  --repo-id YOUR_ORG/YOUR_DATASET \
-  --revision main --cache-dir outputs/profile_cache \
-  --family base --family context \
-  --group culturax_ko_cleaned --value fairness \
-  --min-support base=500 --min-support context=30 \
-  --output-dir outputs/selected_profiles
-```
-
-The organizer fetches the manifest, selected family/group files, and supplied
-catalogs. It verifies file sizes and SHA-256 checksums and records the resolved
-remote commit. Value and support filtering happen locally. Repeat `--family`,
+The organizer verifies selected files against the manifest's sizes and SHA-256
+checksums. Value and support filtering happen locally. Repeat `--family`,
 `--group`, or `--value` to select multiple names; omit an option to leave that
 dimension unrestricted.
 
@@ -110,6 +101,16 @@ unified `datasets.load_dataset` configuration. See the
 support fields, and access options.
 
 ## Build profiles from your own data
+
+<details>
+<summary>Watch the profile-construction walkthrough (15 seconds)</summary>
+
+![Animated walkthrough from group text to value identification, expression/intensity/relation signals, and an aggregated profile.](docs/assets/animations/profile-construction.gif)
+
+Illustrative example. Sentences, annotations, scores, and distributions are
+schematic rather than actual annotation outputs or empirical results.
+
+</details>
 
 Use Python 3.10+ and a POSIX environment with Bash for the shell launchers.
 Install the CPU processing and aggregation dependencies:
@@ -167,15 +168,11 @@ These checks do not download models. Model-interface and remote-download tests
 use test doubles. The synthetic pipeline example is separate from the actual
 aggregate examples bundled for profile inspection.
 
-## TODO
+## Coming soon
 
-- [ ] Publish the full aggregate bundle on Hugging Face and add its dataset URL.
-- [ ] Add source-specific data acquisition and preparation instructions.
-- [ ] Add steering code and usage examples.
-- [ ] Add model-training code and usage examples.
-- [ ] Add project code/catalog and aggregate-data licenses; see [licensing status](DATA.md#project-licensing-status).
-
-Steering and model training are not included in the current pipeline release.
+Steering and model-training code, along with source-specific data acquisition
+instructions, are planned for a future release. The current pipeline starts
+from prepared data.
 
 ## Data and licenses
 

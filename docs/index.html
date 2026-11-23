@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#6c4dd9">
+  <title>DVP · Values Are Not Single Labels</title>
+  <meta name="description" content="Distributional Value Profiling Across Groups and Contexts. A NeurIPS 2026 paper by Woojin Kim and Jaeyoung Do, SNU AIDAS Lab.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Values Are Not Single Labels · DVP">
+  <meta property="og:description" content="Representing how values are expressed, how strongly, and in relation to one another—across groups and contexts.">
+  <meta property="og:image" content="https://darklightened.github.io/DVP/assets/figures/framework.png">
+  <meta property="og:image:alt" content="The Distributional Value Profiling framework">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="nav-shell" aria-label="Main navigation">
+      <a class="wordmark" href="#top" aria-label="DVP home">DVP<span>.</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu <span aria-hidden="true">☰</span></button>
+      <div class="nav-links" id="nav-links">
+        <a href="#abstract">Abstract</a>
+        <a href="#overview">Overview</a>
+        <a href="#method">Method</a>
+        <a href="#findings">Findings</a>
+        <a href="#resources">Resources</a>
+        <a href="#citation">Cite <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="paper-title">
+      <div class="hero-orb orb-one" aria-hidden="true"></div>
+      <div class="hero-orb orb-two" aria-hidden="true"></div>
+      <div class="container hero-content">
+        <a class="venue" href="https://neurips.cc/virtual/2026/loc/sydney/poster/154170"><span class="venue-dot" aria-hidden="true"></span> NeurIPS 2026 <span aria-hidden="true">↗</span></a>
+        <div class="hero-monogram" aria-hidden="true">DVP</div>
+        <h1 id="paper-title">Values Are Not Single Labels<span>Distributional Value Profiling<br>Across Groups and Contexts</span></h1>
+        <p class="authors">Woojin Kim <span class="author-divider" aria-hidden="true">·</span> Jaeyoung Do<sup>†</sup></p>
+        <p class="affiliation">AIDAS Lab · Department of Electrical and Computer Engineering<br>Seoul National University</p>
+        <div class="hero-actions" aria-label="Project links">
+          <a class="button button-primary" href="https://github.com/Darklightened/DVP"><span aria-hidden="true">&lt;/&gt;</span> Code <span aria-hidden="true">↗</span></a>
+          <a class="button button-light" href="https://neurips.cc/virtual/2026/loc/sydney/poster/154170">Conference page <span aria-hidden="true">↗</span></a>
+          <span class="button button-unavailable" aria-disabled="true">Paper <span class="soon">Coming soon</span></span>
+          <span class="button button-unavailable" aria-disabled="true">Dataset <span class="soon">Coming soon</span></span>
+        </div>
+        <p class="hero-takeaway">Not one score. A distribution of how values are expressed.</p>
+        <a class="explore-link" href="#overview">Explore the framework <span aria-hidden="true">↓</span></a>
+      </div>
+    </section>
+
+    <div class="study-band" aria-label="Study at a glance">
+      <div class="container study-grid">
+        <div><strong>21</strong><span>Cultural, political &amp; religious groups</span></div>
+        <div><strong>~2K</strong><span>Representative value items</span></div>
+        <div><strong>3</strong><span>Complementary profile components</span></div>
+        <div><strong class="stat-text">Context-aware</strong><span>Distribution shifts via optimal transport</span></div>
+      </div>
+    </div>
+
+    <section class="section" id="abstract" aria-labelledby="abstract-heading">
+      <div class="container abstract-layout">
+        <div class="section-heading">
+          <p class="eyebrow">The idea</p>
+          <h2 id="abstract-heading">Diversity is structure.<br><span class="muted-heading">Not noise.</span></h2>
+          <div class="takeaway"><span class="tiny-label">TL;DR</span><p>We represent group-level value expression as distributions—and use those distributions as targets for prediction and alignment.</p></div>
+        </div>
+        <div class="abstract-text">
+          <h3>Abstract</h3>
+          <p>Human values are not single labels, but distributions: they vary across individuals, contexts, and their relationships with other values. Yet most alignment approaches still compress group-level values into scalar scores or single representative targets, erasing within-group diversity and missing how value expression shifts across situations. We introduce <strong>Distributional Value Profiling</strong>, a framework for representing group-level value expression as distributions over expression modes, intensity, and inter-value relationships.</p>
+          <p>Using large scale text corpora spanning cultural, political, and religious groups, we construct profiles that capture not only which values are expressed, but also how they are expressed, how strongly they are emphasized, and how they relate to one another. We then model context-dependent shifts in these profiles using optimal transport, revealing structured redistributions of value expression across situations.</p>
+          <p>Finally, we show that these profiles are actionable: a lightweight profiling model generalizes to unseen value-context combinations, and an activation-based steering method guides model outputs toward target distributions at inference time, consistently outperforming baselines across diverse benchmarks. Together, these results establish distributional value profiling as a concrete step toward pluralistic alignment, treating within-group diversity not as noise to be averaged away, but as structure to be measured, predicted, and controlled.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tinted" id="overview" aria-labelledby="overview-heading">
+      <div class="container">
+        <div class="section-heading centered">
+          <p class="eyebrow">Framework</p>
+          <h2 id="overview-heading">From expressed values<br>to distributional profiles.</h2>
+          <p class="section-lead">Capture what an average leaves out: multiple expression modes, different intensities, and relationships between values.</p>
+        </div>
+        <figure class="paper-figure overview-figure">
+          <a class="figure-link" href="assets/figures/framework.png" data-figure data-title="Figure 1 · Distributional Value Profiling" aria-label="Enlarge Figure 1: Distributional Value Profiling framework">
+            <img src="assets/figures/framework.png" width="1638" height="646" alt="Group-associated text is annotated with values, expression states, relations, and context. These signals form distributional profiles used for profile prediction and alignment." loading="lazy" decoding="async">
+            <span class="zoom-label" aria-hidden="true">View figure <span>↗</span></span>
+          </a>
+          <figcaption><strong>Figure 1.</strong> Overview of the framework. Structured value signals are extracted from group-associated text, aggregated into distributional profiles, and used for profile generalization and alignment.</figcaption>
+        </figure>
+        <div class="components">
+          <article class="component-card purple-card"><div class="component-number">01 <span>Expression</span></div><h3>How is a value expressed?</h3><p>A distribution over value-specific modes, such as affirmation, constraint, or trade-off—not just whether a value is present.</p><div class="formula" aria-label="Probability of expression state z given value v and group a">p(z | v, a)</div></article>
+          <article class="component-card teal-card"><div class="component-number">02 <span>Intensity</span></div><h3>How strongly is it expressed?</h3><p>A continuous distribution of sentence-level scores estimated by projecting model activations onto value-specific axes.</p><div class="formula" aria-label="Probability of intensity s given value v and group a">p(s | v, a)</div></article>
+          <article class="component-card pink-card"><div class="component-number">03 <span>Relations</span></div><h3>How do values interact?</h3><p>Distributions over co-occurring values and their relationships: association, direction, and tension.</p><div class="formula" aria-label="Probability of a related value v prime given value v and group a">p(v′ | v, a)</div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="method" aria-labelledby="method-heading">
+      <div class="container">
+        <div class="section-heading split-heading"><div><p class="eyebrow">Construction</p><h2 id="method-heading">Text → signals → profiles.</h2></div><p class="section-lead">Extract structured value information from naturally occurring discourse, then aggregate across sentences.</p></div>
+        <figure class="construction-animation">
+          <details id="construction-walkthrough" class="animation-panel">
+            <summary><span>Animated walkthrough <span class="animation-duration">15 seconds</span></span><span class="animation-show" aria-hidden="true">Show animation ↓</span><span class="animation-hide" aria-hidden="true">Hide animation ↑</span></summary>
+            <img src="assets/animations/profile-construction.gif" width="1280" height="720" alt="Illustrative walkthrough: select group text, identify a value, extract expression, intensity, and relation signals, then aggregate them into a distributional profile." loading="lazy" decoding="async">
+            <p class="animation-source"><a href="assets/animations/profile-construction.gif" target="_blank" rel="noopener">Open full-size animation ↗</a></p>
+          </details>
+          <figcaption>Illustrative construction example. Sentences, annotations, scores, and distributions are schematic—not actual annotation outputs or empirical results.</figcaption>
+        </figure>
+        <figure class="paper-figure">
+          <a class="figure-link" href="assets/figures/construction.png" data-figure data-title="Figure 3 · Profile construction" aria-label="Enlarge Figure 3: Profile construction pipeline">
+            <img src="assets/figures/construction.png" width="1584" height="420" alt="The paper's construction pipeline: collect and filter group-associated text, assign canonical value items, annotate expression states, intensity and relations, and aggregate distributions." loading="lazy" decoding="async">
+            <span class="zoom-label" aria-hidden="true">View figure <span>↗</span></span>
+          </a>
+          <figcaption><strong>Figure 3.</strong> The paper's pipeline for constructing base distributional value profiles.</figcaption>
+        </figure>
+        <div class="context-callout"><div><p class="eyebrow">Add the situation</p><h3>The same value. A different context.</h3><p>Condition each profile on structured context factors. Optimal transport measures how probability mass shifts across expression states, intensity scores, and value–relation pairs.</p></div><div class="context-equation" aria-label="Probability of value expression given a value, group, and context">p(· | v, a, <span>c</span>)<small>value · group · context</small></div></div>
+      </div>
+    </section>
+
+    <section class="section section-tinted" id="findings" aria-labelledby="findings-heading">
+      <div class="container">
+        <div class="section-heading centered"><p class="eyebrow">What the profiles reveal</p><h2 id="findings-heading">Variation within groups.<br>Structure across contexts.</h2></div>
+        <article class="finding">
+          <div class="finding-heading"><span class="finding-index">01</span><div><h3>A shared value does not imply a shared expression.</h3><p>Gender equality, solidarity, and faith each exhibit different mixtures of expression modes across the corresponding group-associated corpora.</p></div></div>
+          <figure class="paper-figure">
+            <a class="figure-link" href="assets/figures/group_distributions.png" data-figure data-title="Figure 4 · Group-level expression distributions" aria-label="Enlarge Figure 4: Group-level expression distributions">
+              <img src="assets/figures/group_distributions.png" width="1655" height="482" alt="Three grouped bar charts show different expression-mode proportions for gender equality across cultural corpora, solidarity across political corpora, and faith across religious corpora." loading="lazy" decoding="async">
+              <span class="zoom-label" aria-hidden="true">View figure <span>↗</span></span>
+            </a>
+            <figcaption><strong>Figure 4.</strong> Base expression-mode distributions for representative values across the groups.</figcaption>
+          </figure>
+        </article>
+        <article class="finding">
+          <div class="finding-heading"><span class="finding-index">02</span><div><h3>Context reshapes the distribution—not just its mean.</h3><p>For compassion in Buddhist discourse, different attitudes toward suffering are associated with shifts in expression modes, intensity, and relationships with other values.</p></div></div>
+          <figure class="paper-figure">
+            <a class="figure-link" href="assets/figures/context_shifts.png" data-figure data-title="Figure 5 · Context-dependent shifts" aria-label="Enlarge Figure 5: Context-dependent profile shifts">
+              <img src="assets/figures/context_shifts.png" width="1651" height="428" alt="Compassion profiles in Buddhist discourse under dismissive, neutral, and supportive attitudes toward suffering: expression-mode bars, intensity distributions, and a heatmap of relation changes." loading="lazy" decoding="async">
+              <span class="zoom-label" aria-hidden="true">View figure <span>↗</span></span>
+            </a>
+            <figcaption><strong>Figure 5.</strong> Contextual shifts for compassion in Buddhism under different attitudes toward suffering: expression modes, intensity, and relative changes in relation types.</figcaption>
+          </figure>
+        </article>
+        <p class="interpretation-note"><strong>Reading these profiles.</strong> These are patterns of value expression in group-associated discourse, not direct measurements of individual beliefs or representative population estimates. Context comparisons describe associations, not causal effects.</p>
+      </div>
+    </section>
+
+    <section class="section actionability" aria-labelledby="actionability-heading">
+      <div class="container">
+        <div class="section-heading centered"><p class="eyebrow">Beyond description</p><h2 id="actionability-heading">Profiles we can predict.<br>Distributions we can steer toward.</h2><p class="section-lead">The paper evaluates two ways to turn measured variation into actionable targets.</p></div>
+        <div class="application-grid">
+          <article class="application-card"><span class="tiny-label">Profile generalization</span><h3>Estimate unseen combinations.</h3><p>A lightweight predictor on a frozen Qwen3-4B backbone learns to estimate base distributions and context shifts for held-out values and context factors.</p><div class="result-pair"><div><strong>0.07</strong><span>Base expression KL ↓</span></div><div><strong>0.09</strong><span>Base intensity MAE ↓</span></div></div><p class="result-source">Reported in Table 4 of the paper.</p></article>
+          <article class="application-card"><span class="tiny-label">Profile-guided steering</span><h3>Align without a single target answer.</h3><p>Compact, attribute-specific activation shifts guide a frozen model toward profile-derived targets. The paper evaluates transfer to GlobalOpinionQA and OpinionQA, without training steering vectors on their survey distributions.</p><p class="steering-result">Lowest reported KLD across <strong>all six</strong> model–benchmark settings.</p><p class="result-source">Table 5 · Three models, two benchmarks. JSD includes ties.</p></article>
+        </div>
+        <p class="release-note">Profiling-model training and steering code: <strong>coming soon.</strong> The current code release covers data processing, annotation, and profile construction.</p>
+      </div>
+    </section>
+
+    <section class="section" id="resources" aria-labelledby="resources-heading">
+      <div class="container">
+        <div class="section-heading split-heading"><div><p class="eyebrow">Start exploring</p><h2 id="resources-heading">Work with the profiles.</h2></div><p class="section-lead">Inspect the bundled aggregates, run the construction pipeline, or follow the full dataset release.</p></div>
+        <div class="resource-grid">
+          <a class="resource-card" href="https://github.com/Darklightened/DVP"><span class="resource-kicker">Code &amp; documentation <span aria-hidden="true">↗</span></span><h3>Build your own profiles.</h3><p>Configurable processing, annotation, activation scoring, and aggregation stages.</p><span class="resource-cta">Explore the repository →</span></a>
+          <a class="resource-card" href="https://github.com/Darklightened/DVP/tree/main/examples/released_profiles"><span class="resource-kicker">Aggregate examples <span aria-hidden="true">↗</span></span><h3>Explore the formats.</h3><p>Small actual examples across eight profile families and seven CulturaX language groups.</p><span class="resource-cta">View bundled examples →</span></a>
+          <article class="resource-card resource-pending"><span class="resource-kicker">Hugging Face <span class="soon">Coming soon</span></span><h3>The full aggregate bundle.</h3><p>Aggregate profiles without original corpus text, row-level annotations, or raw activations.</p><span class="resource-cta">Full dataset coming soon</span></article>
+        </div>
+        <div class="data-note"><span class="tiny-label">Data &amp; reuse</span><p>Source-data terms and project licensing are distinct. Please read the <a href="https://github.com/Darklightened/DVP/blob/main/DATA.md">Reddit/CulturaX notices and licensing status</a> before reuse. Code/catalog and aggregate-data licenses remain to be specified.</p></div>
+      </div>
+    </section>
+
+    <section class="section citation-section" id="citation" aria-labelledby="citation-heading">
+      <div class="container citation-container">
+        <div class="section-heading"><p class="eyebrow">Citation</p><h2 id="citation-heading">Building on this work?</h2><p>If you find distributional value profiling useful, please cite our paper.</p></div>
+        <div class="citation-box"><div class="citation-topline"><span>BibTeX</span><button id="copy-citation" type="button">Copy citation <span aria-hidden="true">⧉</span></button></div>
+<pre><code id="bibtex">@inproceedings{kim2026distributionalvalueprofiling,
+  title     = {Values Are Not Single Labels: Distributional Value
+               Profiling Across Groups and Contexts},
+  author    = {Kim, Woojin and Do, Jaeyoung},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2026},
+  url       = {https://neurips.cc/virtual/2026/loc/sydney/poster/154170}
+}</code></pre>
+        </div>
+        <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-layout"><div><a class="wordmark" href="#top">DVP<span>.</span></a><p>AIDAS Lab · Seoul National University</p></div><div class="footer-links"><a href="https://neurips.cc/virtual/2026/loc/sydney/poster/154170">NeurIPS 2026 ↗</a><a href="https://github.com/Darklightened/DVP">Code ↗</a><a href="https://github.com/Darklightened/DVP/blob/main/DATA.md">Data &amp; licenses ↗</a></div></div></footer>
+
+  <dialog id="figure-dialog" aria-labelledby="figure-title">
+    <div class="dialog-heading"><h2 id="figure-title">Paper figure</h2><button id="close-figure" type="button" aria-label="Close figure">×</button></div>
+    <div class="dialog-image"><img id="expanded-figure" alt=""></div>
+    <a id="full-figure-link" target="_blank" rel="noopener">Open full-resolution image ↗</a>
+  </dialog>
+</body>
+</html>
