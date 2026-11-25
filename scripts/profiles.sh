@@ -19,7 +19,7 @@ attr="${ARGS[0]}"; attribute_name "$attr"
 names=(); paths=()
 for source_name in "${ARGS[@]:1}"; do
   safe_name "$source_name" SOURCE
-  for previous in "${names[@]}"; do [[ "$source_name" != "$previous" ]] || die "Duplicate source: $source_name"; done
+  for previous in ${names[@]+"${names[@]}"}; do [[ "$source_name" != "$previous" ]] || die "Duplicate source: $source_name"; done
   names+=("$source_name")
   paths+=("outputs/activations/$source_name/processed/$attr.jsonl")
 done

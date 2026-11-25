@@ -22,7 +22,7 @@ require_new "$score_prefix.scores.npz" "$score_prefix.meta.jsonl" "$score_prefix
 coverage "$canonical"
 run "$VALUE_PYTHON" -m activation_parser.calculate_activation_intensity \
   --input_jsonls "$canonical" --text_key target_sentence --model_name "$MODEL_NAME" \
-  "${TRUST_ARGS[@]}" --dtype "${DTYPE:-auto}" --device_map "${DEVICE_MAP:-auto}" --layers "$LAYERS" \
+  ${TRUST_ARGS[@]+"${TRUST_ARGS[@]}"} --dtype "${DTYPE:-auto}" --device_map "${DEVICE_MAP:-auto}" --layers "$LAYERS" \
   --pooling "${POOLING:-mean_last_k_tokens}" --last_k "${LAST_K:-3}" --max_length "${SCORE_MAX_LENGTH:-256}" --batch_size "${SCORE_BATCH_SIZE:-16}" \
   --value_index_jsonl "$VECTOR_PREFIX.value_vectors_index.jsonl" --value_vectors_npz "$VECTOR_PREFIX.value_vectors.npz" \
   --activation_config "$ACTIVATION_CONFIG" --dedup_value_defs_json "$VALUE_DEFS" \
