@@ -4,7 +4,7 @@
 filter_surface_regimes.py
 
 Filtering behavior:
-- Exclude category name == "Not Invoked" from:
+- Exclude the non-invocation category ("Not Invoked") from:
     (a) threshold sum calculation
     (b) output categories list (removed)
     (c) proportions (computed over non-"Not Invoked" counts)
@@ -15,6 +15,11 @@ Keep row if:
 Adds:
   - per-category "proportion" (over the same non-"Not Invoked" total)
   - "total_count" (the non-"Not Invoked" total used for filtering)
+
+The non-invocation category is the last category of each value item, as in
+context_parser.context_effect_ot. Most catalog entries name it "Not Invoked",
+but some use value-specific labels (e.g. "Progress Not Invoked"), so it is
+identified by position rather than by name.
 """
 
 from __future__ import annotations
@@ -23,9 +28,6 @@ import argparse
 import json
 import os
 from typing import Any, Dict, Iterable, List, Optional
-
-
-NOT_INVOKED_NAME = "Not Invoked"
 
 
 def _ensure_dir(path: str) -> None:
@@ -80,15 +82,9 @@ def process_file(
             if not isinstance(cats, list):
                 continue
 
-            # 1) total over NON "Not Invoked"
-            total_non_notinv = 0
-            for c in cats:
-                if not isinstance(c, dict):
-                    continue
-                name = c.get("name")
-                if name == NOT_INVOKED_NAME:
-                    continue
-                total_non_notinv += _to_int(c.get("count", 0))
+            # 1) total over invoked categories (all but the last, non-invocation one)
+            invoked_cats = [c for c in cats if isinstance(c, dict)][:-1]
+            total_non_notinv = sum(_to_int(c.get("count", 0)) for c in invoked_cats)
 
             # 2) filter by total_non_notinv
             if total_non_notinv <= threshold:
@@ -96,12 +92,7 @@ def process_file(
 
             # 3) build new categories list WITHOUT "Not Invoked", add proportions
             new_cats: List[Any] = []
-            for c in cats:
-                if not isinstance(c, dict):
-                    continue  # drop non-dict junk
-                if c.get("name") == NOT_INVOKED_NAME:
-                    continue
-
+            for c in invoked_cats:
                 cnt_i = _to_int(c.get("count", 0))
                 prop = (cnt_i / total_non_notinv) if total_non_notinv > 0 else 0.0
                 if round_digits is not None:
