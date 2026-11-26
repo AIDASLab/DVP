@@ -42,10 +42,10 @@ else
     --input_jsonl "$posneg" --model_name "$MODEL_NAME" --out_dir "$VECTOR_DIR/activations" \
     --layers "$LAYERS" --pooling "${POOLING:-mean_last_k_tokens}" --last_k "${LAST_K:-3}" \
     --batch_size "${EXTRACTION_BATCH_SIZE:-1}" --shard_size "${SHARD_SIZE:-50000}" \
-    --format npz --dtype "${DTYPE:-auto}" "${TRUST_ARGS[@]}" --device_map "${DEVICE_MAP:-auto}" \
-    --require_fresh_output "${extraction_args[@]}"
+    --format npz --dtype "${DTYPE:-auto}" ${TRUST_ARGS[@]+"${TRUST_ARGS[@]}"} --device_map "${DEVICE_MAP:-auto}" \
+    --require_fresh_output ${extraction_args[@]+"${extraction_args[@]}"}
   run "$VALUE_PYTHON" -m activation_parser.save_value_vectors \
     --meta_jsonl "$VECTOR_DIR/activations/${MODEL_TAG}_activations_meta.jsonl" \
     --shard_glob "$VECTOR_DIR/activations/${MODEL_TAG}_activations_shard*.npz" \
-    --out_prefix "$VECTOR_PREFIX" "${vector_args[@]}"
+    --out_prefix "$VECTOR_PREFIX" ${vector_args[@]+"${vector_args[@]}"}
 fi
